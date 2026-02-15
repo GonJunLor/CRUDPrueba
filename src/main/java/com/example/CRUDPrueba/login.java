@@ -19,7 +19,7 @@ public class login {
     @PostMapping("/login")
     public String comprobarLogin(@RequestParam(value = "nombre", defaultValue = "") String nombre){
         if (nombre.equals("gonzalo")) {
-            return "inicioPrivado";
+            return "redirect:/privado";
         }
         return "login";
     }
