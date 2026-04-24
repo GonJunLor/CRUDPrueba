@@ -10,11 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class Principal {
 
-	public static String sesion;
-
 	public static void main(String[] args) {
 		SpringApplication.run(Principal.class, args);
-		sesion = "";
 	}
 
 	@GetMapping("/")
