@@ -18,8 +18,8 @@ public class InicioPrivado {
         // Recuperamos el atributo de la sesión (hay que castearlo a String)
         String usuario = (String) sesion.getAttribute("usuarioLogueado");
 
-        // Si es null (no ha pasado por el login) o no es "gonzalo2", lo echamos
-        if (usuario==null || !usuario.equals("gonzalo2")) {
+        // Si es null (no ha pasado por el login) lo echamos
+        if (usuario==null) {
             return "redirect:/login";
         }
 
@@ -35,8 +35,8 @@ public class InicioPrivado {
         // Recuperamos el atributo de la sesión (hay que castearlo a String)
         String usuario = (String) sesion.getAttribute("usuarioLogueado");
 
-        // Si es null (no ha pasado por el login) o no es "gonzalo2", lo echamos
-        if (usuario==null || !usuario.equals("gonzalo2")) {
+        // Si es null (no ha pasado por el login) lo echamos
+        if (usuario==null) {
             return "redirect:/login";
         }
 

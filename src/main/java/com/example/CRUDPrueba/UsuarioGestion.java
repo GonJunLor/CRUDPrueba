@@ -7,7 +7,7 @@ public interface UsuarioGestion  extends CrudRepository<Usuario, Long>{
 
     
     // Spring entiende que quieres hacer un "SELECT * FROM usuarios WHERE nombre = ?"
-    Usuario findByNombre(String nombre);
+    Usuario findByCodUsuario(String codUsuario);
     /* Para que esa magia funcione, los nombres de los métodos tienen que seguir una convención 
     muy estricta en inglés: siempre deben empezar por prefijos como findBy, existsBy, deleteBy, 
     seguidos del nombre exacto de la variable en tu clase (empezando en mayúscula). */
