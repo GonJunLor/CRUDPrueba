@@ -1,5 +1,6 @@
 package com.example.CRUDPrueba;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,7 +32,10 @@ public class Principal {
 
 		Usuario usuario1 = usuarioBBDD.findByCodUsuario("gonzalo");
 
-		System.out.println(usuario1.getDescUsuario());
+		// Para hashear contraseña, cuando haga el registro borro esto
+		System.out.println("Hash paso 1: " + BCrypt.hashpw("paso", BCrypt.gensalt()));
+		System.out.println("Hash paso 2: " + BCrypt.hashpw("paso", BCrypt.gensalt()));
+		System.out.println("Hash paso 3: " + BCrypt.hashpw("paso", BCrypt.gensalt()));
 
 		if (usuario1!=null) {
 			modelo.addAttribute("mensajeConexionBBDD", "Conexión a BBDD exitosa...");

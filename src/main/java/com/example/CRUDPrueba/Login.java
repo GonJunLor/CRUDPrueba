@@ -1,5 +1,6 @@
 package com.example.CRUDPrueba;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,15 @@ public class Login {
 
     // Aquí entra desde las redirecciones de los enlaces, etiquetas <a> de html
     @GetMapping("/login")
-    public String cargarLogin(){
+    public String cargarLogin(HttpSession sesion){
+
+        // Recuperamos el atributo de la sesión (hay que castearlo a String)
+        Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioLogueado");
+
+        // Si es null (no ha pasado por el login) lo echamos
+        if (usuarioActual!=null) {
+            return "redirect:/privado";
+        }
         
         return "login";
     }
@@ -25,17 +34,20 @@ public class Login {
     @PostMapping("/login")
     public String comprobarLogin(
         @RequestParam(value = "codUsuario", defaultValue = "") String codUsuario,
+        @RequestParam(value = "contrasena", defaultValue = "") String contrasena,
         HttpSession sesion
     ){
-        // Cambiar equals por comprobación de nombre de usuario y contraseña en bbdd
-        if (usuarioBBDD.findByCodUsuario(codUsuario)!=null) {
-            System.out.println("nombre de usuario: " + codUsuario);
-
+        // Recuperamos el usuario de la bbdd por el codigo de usuario
+        Usuario usuario = usuarioBBDD.findByCodUsuario(codUsuario);
+        
+        // Comprobamos la contraseña con el método de la libreria BCrypt
+        if (usuario!=null && BCrypt.checkpw(contrasena, usuario.getContrasena())) {
+            
             // Guardamos el estado de usuario logueado en la sesión privada de éste usuario
-            sesion.setAttribute("usuarioLogueado", codUsuario);
+            sesion.setAttribute("usuarioLogueado", usuario);
 
             // return "redirect:/privado";
-            return "inicioPrivado";
+            return "redirect:/privado";
         }
         return "login";
     }

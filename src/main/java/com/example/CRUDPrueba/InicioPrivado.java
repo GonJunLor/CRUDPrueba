@@ -16,7 +16,7 @@ public class InicioPrivado {
     @GetMapping("/privado")
     public String cargarInicioPrivado(HttpSession sesion){
         // Recuperamos el atributo de la sesión (hay que castearlo a String)
-        String usuario = (String) sesion.getAttribute("usuarioLogueado");
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioLogueado");
 
         // Si es null (no ha pasado por el login) lo echamos
         if (usuario==null) {
@@ -32,8 +32,8 @@ public class InicioPrivado {
         Model modelo,
         HttpSession sesion
     ){
-        // Recuperamos el atributo de la sesión (hay que castearlo a String)
-        String usuario = (String) sesion.getAttribute("usuarioLogueado");
+        // Recuperamos el atributo de la sesión (hay que castearlo a Usuario)
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioLogueado");
 
         // Si es null (no ha pasado por el login) lo echamos
         if (usuario==null) {
