@@ -26,8 +26,9 @@ public class InicioPrivado {
             return "redirect:/login";
         }
 
+        modelo.addAttribute("categorias", Categoria.values());
+        modelo.addAttribute("estados", Estado.values());
         modelo.addAttribute("nombreCompleto",usuario.getDescUsuario());
-        System.out.println("Sesión en privado del usuario: " + usuario);
 
         return "inicioPrivado";
     }
@@ -35,6 +36,8 @@ public class InicioPrivado {
     @PostMapping("/privado")
     public String manejarDatosFormularioPost(
         @RequestParam(value = "nom", defaultValue = "") String nombre,
+        @RequestParam(value = "formCategoria", defaultValue = "") String formCategoria,
+        @RequestParam(value = "formEstado", defaultValue = "") String formEstado,
         Model modelo,
         HttpSession sesion
     ){
@@ -46,9 +49,16 @@ public class InicioPrivado {
             return "redirect:/login";
         }
 
+        modelo.addAttribute("categorias", Categoria.values());
+        modelo.addAttribute("estados", Estado.values());
         modelo.addAttribute("nombreCompleto",usuario.getDescUsuario());
-        System.out.println("Sesión en privado del usuario: " + usuario);
+
+        System.out.println("Categoria: " + formCategoria + ", estado: " + Estado.valueOf(formEstado).getTextoMostrar() );
 
         return "inicioPrivado";
+    }
+
+    private void cosasComunes(){
+        
     }
 }
