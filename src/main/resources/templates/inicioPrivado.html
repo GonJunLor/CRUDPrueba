@@ -7,10 +7,10 @@
     <title>Inicio Privado</title>
 </head>
 <body>
-    <h1>Bienvenido a inicio privado <span th:text="${n1}"></span></h1>
+    <h1>Hola <span th:text="${nombreCompleto}"></span>, ésta es tu área privada</h1>
     <form action="/privado" method="post">
         <input type="text" name="nom" id="nom" value="">
-        <input type="submit" value="enviar">
+        <input type="submit" value="buscar">
     </form>
     <a href="/">Salir</a>
     <a href="/cerrar">Cerrar Sesion</a>

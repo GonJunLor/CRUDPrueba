@@ -14,7 +14,10 @@ import jakarta.servlet.http.HttpSession;
 public class InicioPrivado {
     
     @GetMapping("/privado")
-    public String cargarInicioPrivado(HttpSession sesion){
+    public String cargarInicioPrivado(
+        Model modelo,
+        HttpSession sesion
+    ){
         // Recuperamos el atributo de la sesión (hay que castearlo a String)
         Usuario usuario = (Usuario) sesion.getAttribute("usuarioLogueado");
 
@@ -22,6 +25,9 @@ public class InicioPrivado {
         if (usuario==null) {
             return "redirect:/login";
         }
+
+        modelo.addAttribute("nombreCompleto",usuario.getDescUsuario());
+        System.out.println("Sesión en privado del usuario: " + usuario);
 
         return "inicioPrivado";
     }
@@ -40,7 +46,7 @@ public class InicioPrivado {
             return "redirect:/login";
         }
 
-        modelo.addAttribute("n1",nombre);
+        modelo.addAttribute("nombreCompleto",usuario.getDescUsuario());
         System.out.println("Sesión en privado del usuario: " + usuario);
 
         return "inicioPrivado";

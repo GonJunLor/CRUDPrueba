@@ -16,6 +16,9 @@
         <input type="text" name="contrasena" id="contrasena">
         <label for="descUsuario">Nombre y apellidos</label>
         <input type="text" name="descUsuario" id="descUsuario">
+        <label for="palabraSeguridad">Palabra de seguridad</label>
+        <input type="text" name="palabraSeguridad" id="palabraSeguridad">
+        <span class="error rojo" th:text="${error_palabraSeguridad}"></span>
         <input type="submit" value="Entrar">
     </form>
     <a href="/">Cancelar</a>

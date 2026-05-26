@@ -37,13 +37,24 @@ public class Registro {
         @RequestParam(value = "codUsuario", defaultValue = "") String codUsuario,
         @RequestParam(value = "contrasena", defaultValue = "") String contrasena,
         @RequestParam(value = "descUsuario", defaultValue = "") String descUsuario,
+        @RequestParam(value = "palabraSeguridad", defaultValue = "") String palabraSeguridad,
         Model modelo,
         HttpSession sesion
     ){
+        boolean validaOK = true;
+
+        if(!BCrypt.checkpw(palabraSeguridad, "$2a$10$DNUYSMUhFX1xQf/ONd1wxebBZCVSP6bNu3xyMX1JVODW4aOXlHfZ2")){
+            modelo.addAttribute("error_palabraSeguridad", "Palabra de seguridad incorrecta");
+            validaOK = false;
+        }
+
         if (usuarioBBDD.existsByCodUsuario(codUsuario)) {
             // Si existe el usuario lanzamos un mensaje de error
             modelo.addAttribute("error_codUsuario", "El usuario ya existe");
-        } else {
+            validaOK = false;
+        } 
+
+        if (validaOK) {
             // Si no existe el usuario lo creamos y vamos a inicio privado
             Usuario nuevoUsuario = new Usuario();
             nuevoUsuario.setCodUsuario(codUsuario);

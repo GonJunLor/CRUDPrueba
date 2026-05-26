@@ -28,25 +28,12 @@ public class Principal {
 		@RequestParam(value = "name", defaultValue = "World") String name,
 		Model modelo
 	) {
-		modelo.addAttribute("mensajeConexionBBDD", "Todavia no me he conectado a la BBDD");
-
-		Usuario usuario1 = usuarioBBDD.findFirstByCodUsuario("gonzalo");
-
-		// Para hashear contraseña, cuando haga el registro borro esto
-		System.out.println("Hash paso 1: " + BCrypt.hashpw("paso", BCrypt.gensalt()));
-		System.out.println("Hash paso 2: " + BCrypt.hashpw("paso", BCrypt.gensalt()));
-		System.out.println("Hash paso 3: " + BCrypt.hashpw("paso", BCrypt.gensalt()));
-
-		if (usuario1!=null) {
-			modelo.addAttribute("mensajeConexionBBDD", "Conexión a BBDD exitosa...");
-		}
 		
     	return "inicioPublico";
     }
 
 	@GetMapping("/cerrar")
 	public String cerrarSesion(HttpSession sesion){
-		System.out.println("cerrando sesion.......");
 
 		// Forma 1 que es eliminando el atributo del usuario logueado
 		sesion.removeAttribute("usuarioLogueado");
