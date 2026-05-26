@@ -1,4 +1,18 @@
 h1{
     color: yellow;
     background-color: rgb(133, 3, 3);
+    text-align: center;
+}
+.error{
+    display: block;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+.rojo{color: #CB333B;}
+form{
+    display: flex;
+    margin: auto;
+    gap: 8px;
+    width: 50dvw;
+    flex-direction: column;
 }

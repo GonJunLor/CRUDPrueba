@@ -20,7 +20,17 @@ public class Usuario {
     private String codUsuario, contrasena,  descUsuario, perfil;
     private Date fechaHoraUltimaConexion;
 
+    public Usuario(){}
+
     // Getters y Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }    
+
     public String getContrasena() {
         return contrasena;
     }
@@ -51,5 +61,7 @@ public class Usuario {
     public void setFechaHoraUltimaConexion(Date fechaHoraUltimaConexion) {
         this.fechaHoraUltimaConexion = fechaHoraUltimaConexion;
     }
+
+
 
 }

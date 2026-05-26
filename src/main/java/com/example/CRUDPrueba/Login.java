@@ -38,7 +38,7 @@ public class Login {
         HttpSession sesion
     ){
         // Recuperamos el usuario de la bbdd por el codigo de usuario
-        Usuario usuario = usuarioBBDD.findByCodUsuario(codUsuario);
+        Usuario usuario = usuarioBBDD.findFirstByCodUsuario(codUsuario);
         
         // Comprobamos la contraseña con el método de la libreria BCrypt
         if (usuario!=null && BCrypt.checkpw(contrasena, usuario.getContrasena())) {

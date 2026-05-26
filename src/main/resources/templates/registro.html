@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
-    <title>Login</title>
+    <title>Registro</title>
 </head>
 <body>
-    <h1>Estas en el login</h1>
-    <form action="/login" method="post">
+    <h1>Estas en el Registro</h1>
+    <form action="/registro" method="post">
         <label for="codUsuario">Usuario</label>
         <input type="text" name="codUsuario" id="codUsuario">
+        <span class="error rojo" th:text="${error_codUsuario}"></span>
         <label for="contrasena">Contraseña</label>
         <input type="text" name="contrasena" id="contrasena">
+        <label for="descUsuario">Nombre y apellidos</label>
+        <input type="text" name="descUsuario" id="descUsuario">
         <input type="submit" value="Entrar">
     </form>
     <a href="/">Cancelar</a>
-    <a href="/registro">Registrarse</a>
+    <a href="/login">Volver a login</a>
 </body>
 </html>

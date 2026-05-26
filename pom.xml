@@ -82,6 +82,13 @@
 			<artifactId>mysql-socket-factory-connector-j-8</artifactId>
 			<version>1.15.1</version>
 		</dependency>
+
+		<!-- Para hashear la contraseña -->
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

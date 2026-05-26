@@ -30,7 +30,7 @@ public class Principal {
 	) {
 		modelo.addAttribute("mensajeConexionBBDD", "Todavia no me he conectado a la BBDD");
 
-		Usuario usuario1 = usuarioBBDD.findByCodUsuario("gonzalo");
+		Usuario usuario1 = usuarioBBDD.findFirstByCodUsuario("gonzalo");
 
 		// Para hashear contraseña, cuando haga el registro borro esto
 		System.out.println("Hash paso 1: " + BCrypt.hashpw("paso", BCrypt.gensalt()));
