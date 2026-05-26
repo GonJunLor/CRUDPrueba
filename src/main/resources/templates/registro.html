@@ -10,14 +10,14 @@
     <h1>Estas en el Registro</h1>
     <form action="/registro" method="post">
         <label for="codUsuario">Usuario</label>
-        <input type="text" name="codUsuario" id="codUsuario">
+        <input class="requerido" type="text" name="codUsuario" id="codUsuario" th:value=${valor_codUsuario} required>
         <span class="error rojo" th:text="${error_codUsuario}"></span>
         <label for="contrasena">Contraseña</label>
-        <input type="text" name="contrasena" id="contrasena">
+        <input class="requerido" type="text" name="contrasena" id="contrasena" required>
         <label for="descUsuario">Nombre y apellidos</label>
-        <input type="text" name="descUsuario" id="descUsuario">
+        <input class="requerido" type="text" name="descUsuario" id="descUsuario" required>
         <label for="palabraSeguridad">Palabra de seguridad</label>
-        <input type="text" name="palabraSeguridad" id="palabraSeguridad">
+        <input class="requerido" type="text" name="palabraSeguridad" id="palabraSeguridad" required>
         <span class="error rojo" th:text="${error_palabraSeguridad}"></span>
         <input type="submit" value="Entrar">
     </form>

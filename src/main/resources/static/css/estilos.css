@@ -9,6 +9,7 @@ h1{
     margin-top: 5px;
 }
 .rojo{color: #CB333B;}
+.requerido{background-color: rgb(252, 252, 224);}
 form{
     display: flex;
     margin: auto;

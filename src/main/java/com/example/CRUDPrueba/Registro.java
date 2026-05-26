@@ -19,7 +19,10 @@ public class Registro {
 	private UsuarioGestion usuarioBBDD;
 
     @GetMapping("/registro")
-    public String cargarRegistro(HttpSession sesion){
+    public String cargarRegistro(
+        Model modelo,
+        HttpSession sesion
+    ){
 
         // Recuperamos el atributo de la sesión (hay que castearlo a String)
         Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioLogueado");
@@ -28,6 +31,8 @@ public class Registro {
         if (usuarioActual!=null) {
             return "redirect:/privado";
         }
+
+        modelo.addAttribute("valor_codUsuario", "");
 
         return "registro";
     } 
@@ -70,6 +75,8 @@ public class Registro {
             
             return "redirect:/privado";
         }
+
+        modelo.addAttribute("valor_codUsuario", codUsuario);
 
         return "registro";
     }
