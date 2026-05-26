@@ -1,5 +1,5 @@
 package com.example.CRUDPrueba;
 
-public class Adios {
+public class Detalle {
 
 }
