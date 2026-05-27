@@ -21,13 +21,40 @@
             <option value="" selected disabled hidden>-- Selecciona un estado --</option>
             <option th:each="estado : ${estados}"
                     th:value="${estado}"
-                    th:text="${estado}"
+                    th:text="${estado.getTextoMostrar()}"
             ></option>
         </select>
         <input type="submit" value="buscar">
     </form>
     <a href="/">Salir</a>
     <a href="/cerrar">Cerrar Sesion</a>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <!-- Descripción seguramente la quite y la deje solo en detalle -->
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>Estado</th>
+                <th>Fecha trabajo</th>
+                <th>Privacidad</th>
+                <th>Iconos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tarea : ${tareas}">
+                <td>[*]</td>
+                <td><span th:text="${tarea.getNombre()}"></span></td>
+                <td><span th:text="${tarea.getDescripcion()}"></span></td>
+                <td><span th:text="${tarea.getCategoria()}"></span></td>
+                <td><span th:text="${tarea.getEstado().getTextoMostrar()}"></span></td>
+                <td><span th:text="${tarea.getFechaTrabajo()}"></span></td>
+                <td><span th:text="${tarea.getPrivacidad()}"></span></td>
+                <td>[E][X]</td>
+            </tr>
+        </tbody>
+    </table>
     
 </body>
 </html>

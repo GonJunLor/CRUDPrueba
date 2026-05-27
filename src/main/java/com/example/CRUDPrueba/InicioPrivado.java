@@ -1,5 +1,7 @@
 package com.example.CRUDPrueba;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,12 @@ public class InicioPrivado {
             return "redirect:/login";
         }
 
+        List<Tarea> tareas = usuario.getTareas();
+        for (Tarea tarea : tareas) {
+            System.out.println(tarea);
+        }
+        modelo.addAttribute("tareas", tareas);
+
         modelo.addAttribute("categorias", Categoria.values());
         modelo.addAttribute("estados", Estado.values());
         modelo.addAttribute("nombreCompleto",usuario.getDescUsuario());
@@ -49,6 +57,12 @@ public class InicioPrivado {
             return "redirect:/login";
         }
 
+        List<Tarea> tareas = usuario.getTareas();
+        for (Tarea tarea : tareas) {
+            System.out.println(tarea);
+        }
+        modelo.addAttribute("tareas", tareas);
+
         modelo.addAttribute("categorias", Categoria.values());
         modelo.addAttribute("estados", Estado.values());
         modelo.addAttribute("nombreCompleto",usuario.getDescUsuario());
@@ -58,7 +72,4 @@ public class InicioPrivado {
         return "inicioPrivado";
     }
 
-    private void cosasComunes(){
-        
-    }
 }
