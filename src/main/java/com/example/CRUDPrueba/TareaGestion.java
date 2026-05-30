@@ -14,6 +14,8 @@ public interface TareaGestion extends CrudRepository<Tarea, Long> {
 
     List<Tarea> findByCategoria(String categoria);
 
+    List<Tarea> findByPrivacidad(String privacidad);
+
     List<Tarea> findByUsuarioAndCategoria(Usuario usuario, String categoria);
 
     List<Tarea> findByUsuarioAndNombreContainingIgnoreCaseAndCategoriaAndEstado(

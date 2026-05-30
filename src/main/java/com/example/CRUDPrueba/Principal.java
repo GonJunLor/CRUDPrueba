@@ -1,5 +1,7 @@
 package com.example.CRUDPrueba;
 
+import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +20,8 @@ public class Principal {
 
 	@Autowired
 	private UsuarioGestion usuarioBBDD;
+	@Autowired
+	private TareaGestion tareaBBDD;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Principal.class, args);
@@ -28,6 +32,8 @@ public class Principal {
 		@RequestParam(value = "name", defaultValue = "World") String name,
 		Model modelo
 	) {
+		List<Tarea> tareas = tareaBBDD.findByPrivacidad("Publica");
+		modelo.addAttribute("tareas", tareas);
 		
     	return "inicioPublico";
     }

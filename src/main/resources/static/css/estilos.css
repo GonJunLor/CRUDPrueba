@@ -27,3 +27,6 @@ form{
     cursor:pointer; 
     padding:0;
 }
+.checkbox-bloqueado {
+    pointer-events: none;
+}
