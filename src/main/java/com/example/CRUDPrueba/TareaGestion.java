@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface TareaGestion extends CrudRepository<Tarea, Long> {
 
+    Tarea findById(long id);
+
     List<Tarea> findByUsuario(Usuario usuario);
 
     List<Tarea> findByCategoria(String categoria);

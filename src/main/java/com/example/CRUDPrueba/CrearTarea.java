@@ -77,7 +77,7 @@ public class CrearTarea {
             nuevaTarea.setFechaCreacion(LocalDate.now());
             nuevaTarea.setFechaTrabajo(fechaTrabajo.equals("")? null : LocalDate.parse(fechaTrabajo));
             nuevaTarea.setFechaFinal(null);
-            nuevaTarea.setEstado(Estado.PENDIENTE);
+            nuevaTarea.setEstado(fechaTrabajo.equals("")? Estado.PENDIENTE : Estado.PROGRESO);
             nuevaTarea.setUsuario(usuario);
 
             tareaBBDD.save(nuevaTarea);

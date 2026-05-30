@@ -4,20 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
-    <title>Crear tarea</title>
+    <title>Modificar tarea</title>
 </head>
 <body>
-    <h1>Estas en el Crear tarea</h1>
-    <form action="/crearTarea" method="post">
+    <h1>Estas modificando una tarea</h1>
+    <form action="/modificarTarea" method="post">
+        <input type="hidden" name="idTarea" id="idTarea" th:value="${valor_id}">
+
+        <input type="checkbox" name="hecho" id="hecho" th:checked="${valor_hecho}">
+        <label for="hecho">Completado</label>
+        <span class="error rojo" th:text="${error_hecho}"></span>
+
         <label for="nombre">Nombre</label>
-        <input class="requerido" type="text" name="nombre" id="nombre" th:value="${valor_nombre}" required>
+        <input type="text" name="nombre" id="nombre" th:value="${valor_nombre}">
         <span class="error rojo" th:text="${error_nombre}"></span>
 
         <label for="descripcion">Descripción</label>
         <input type="text" name="descripcion" id="descripcion" th:value="${valor_descripcion}">
 
         <label for="categoria">Categoria</label>
-        <select class="requerido" name="categoria" id="categoria" required>
+        <select name="categoria" id="categoria">
             <option th:if="${valor_categoria == ''}" value="" selected disabled hidden>-- Selecciona una categoría --</option>
             <option th:each="categoria : ${categorias}"
                     th:value="${categoria}"
@@ -27,13 +33,14 @@
         </select>
         <span class="error rojo" th:text="${error_categoria}"></span>
 
-        <!-- El estado es automático no se puede cambiar al crear siempre es Pendiente -->
+        <label for="estado">Estado</label>
+        <input type="text" name="estado" id="estado" th:value="${valor_estado}" readonly>
 
         <label for="privacidad">Privacidad:</label>
-        <input type="radio" id="privado" name="privacidad" value="Privada" th:checked="${valor_privacidad=='privado'}">
-        <label for="privado">Privado</label>
-        <input type="radio" id="publico" name="privacidad" value="Publica" th:checked="${valor_privacidad=='publico'}">
-        <label for="publico">Público</label>
+        <input type="radio" id="privado" name="privacidad" value="Privada" th:checked="${valor_privacidad.equals('Privada')}">
+        <label for="privado">Privada</label>
+        <input type="radio" id="publico" name="privacidad" value="Publica" th:checked="${valor_privacidad.equals('Publica')}">
+        <label for="publico">Pública</label>
 
         <label for="fechaTrabajo">Fecha de trabajo</label>
         <input type="date" name="fechaTrabajo" id="fechaTrabajo" th:value="${valor_fechaTrabajo}">
