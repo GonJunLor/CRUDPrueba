@@ -8,26 +8,30 @@
 </head>
 <body>
     <h1>Hola <span th:text="${nombreCompleto}"></span>, ésta es tu área privada</h1>
+    <a href="/crearTarea">Crear tarea</a>
     <form action="/privado" method="post">
-        <input type="text" name="nom" id="nom" value="">
-        <select name="formCategoria" id="formCategoria" required>
-            <option value="" selected disabled hidden>-- Selecciona una categoría --</option>
+        <input type="text" name="nom" id="nom" th:value="${valor_nombre}">
+        <select name="formCategoria" id="formCategoria">
+            <option value="">-- Todas las categorías --</option>
             <option th:each="categoria : ${categorias}"
                     th:value="${categoria}"
                     th:text="${categoria}"
+                    th:selected="${categoria.toString() == valor_categoria}"
             ></option>
         </select>
-        <select name="formEstado" id="formEstado" required>
-            <option value="" selected disabled hidden>-- Selecciona un estado --</option>
+        <select name="formEstado" id="formEstado">
+            <option value="">-- Todos los estados --</option>
             <option th:each="estado : ${estados}"
                     th:value="${estado}"
                     th:text="${estado.getTextoMostrar()}"
+                    th:selected="${estado == valor_estado}"
             ></option>
         </select>
         <input type="submit" value="buscar">
     </form>
     <a href="/">Salir</a>
     <a href="/cerrar">Cerrar Sesion</a>
+    
     <table>
         <thead>
             <tr>
@@ -49,7 +53,7 @@
                 <td><span th:text="${tarea.getDescripcion()}"></span></td>
                 <td><span th:text="${tarea.getCategoria()}"></span></td>
                 <td><span th:text="${tarea.getEstado().getTextoMostrar()}"></span></td>
-                <td><span th:text="${tarea.getFechaTrabajo()}"></span></td>
+                <td><span th:text="${tarea.getFechaTrabajoFormateada()}"></span></td>
                 <td><span th:text="${tarea.getPrivacidad()}"></span></td>
                 <td>[E][X]</td>
             </tr>

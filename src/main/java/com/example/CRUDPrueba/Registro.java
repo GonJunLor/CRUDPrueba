@@ -1,5 +1,6 @@
 package com.example.CRUDPrueba;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -73,7 +74,7 @@ public class Registro {
             nuevoUsuario.setCodUsuario(codUsuario);
             nuevoUsuario.setContrasena(BCrypt.hashpw(contrasena, BCrypt.gensalt()));
             nuevoUsuario.setDescUsuario(descUsuario);
-            nuevoUsuario.setFechaHoraUltimaConexion(new Date());
+            nuevoUsuario.setFechaHoraUltimaConexion(LocalDate.now());
             nuevoUsuario.setPerfil("Usuario");
 
             usuarioBBDD.save(nuevoUsuario);

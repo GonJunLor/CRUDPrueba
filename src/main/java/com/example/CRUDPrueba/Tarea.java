@@ -1,6 +1,7 @@
 package com.example.CRUDPrueba;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,9 +19,9 @@ public class Tarea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nombre, descripcion, categoria, privacidad;
-    private Date fechaCreacion, fechaTrabajo, fechaFinal;
+    private LocalDate fechaCreacion, fechaTrabajo, fechaFinal;
 
     @Enumerated(EnumType.STRING)
     private Estado estado;
@@ -32,10 +33,10 @@ public class Tarea {
     public Tarea(){}
 
     // Getters y Setters
-    public int getId() {
-        return id;
+    public Long getId() {
+        return id;                                                                          
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getNombre() {
@@ -56,38 +57,37 @@ public class Tarea {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    // public String getEstado() {
-    //     return estado;
-    // }
-    // public void setEstado(String estado) {
-    //     this.estado = estado;
-    // }
-    
     public String getPrivacidad() {
         return privacidad;
     }
     public void setPrivacidad(String privacidad) {
         this.privacidad = privacidad;
     }
-    public Date getFechaCreacion() {
+    public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
-    public Date getFechaTrabajo() {
+    // Dentro de tu clase Tarea.java
+    public String getFechaTrabajoFormateada() {
+        if (this.fechaTrabajo == null) {
+            return "--";
+        }
+        return this.fechaTrabajo.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+    public LocalDate getFechaTrabajo() {
         return fechaTrabajo;
     }
-    public void setFechaTrabajo(Date fechaTrabajo) {
+    public void setFechaTrabajo(LocalDate fechaTrabajo) {
         this.fechaTrabajo = fechaTrabajo;
     }
-    public Date getFechaFinal() {
+    public LocalDate getFechaFinal() {
         return fechaFinal;
     }
-    public void setFechaFinal(Date fechaFinal) {
+    public void setFechaFinal(LocalDate fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
-
 
     public Estado getEstado() {
         return estado;
