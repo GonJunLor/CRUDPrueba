@@ -7,12 +7,58 @@
     <title>Inicio Privado</title>
 </head>
 <body>
-    <h1>Bienvenido a inicio privado <span th:text="${n1}"></span></h1>
+    <h1>Hola <span th:text="${nombreCompleto}"></span>, ésta es tu área privada</h1>
+    <a href="/crearTarea">Crear tarea</a>
     <form action="/privado" method="post">
-        <input type="text" name="nom" id="nom" value="">
-        <input type="submit" value="enviar">
+        <input type="text" name="nom" id="nom" th:value="${valor_nombre}">
+        <select name="formCategoria" id="formCategoria">
+            <option value="">-- Todas las categorías --</option>
+            <option th:each="categoria : ${categorias}"
+                    th:value="${categoria}"
+                    th:text="${categoria}"
+                    th:selected="${categoria.toString() == valor_categoria}"
+            ></option>
+        </select>
+        <select name="formEstado" id="formEstado">
+            <option value="">-- Todos los estados --</option>
+            <option th:each="estado : ${estados}"
+                    th:value="${estado}"
+                    th:text="${estado.getTextoMostrar()}"
+                    th:selected="${estado == valor_estado}"
+            ></option>
+        </select>
+        <input type="submit" value="buscar">
     </form>
     <a href="/">Salir</a>
     <a href="/cerrar">Cerrar Sesion</a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <!-- Descripción seguramente la quite y la deje solo en detalle -->
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>Estado</th>
+                <th>Fecha trabajo</th>
+                <th>Privacidad</th>
+                <th>Iconos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tarea : ${tareas}">
+                <td>[*]</td>
+                <td><span th:text="${tarea.getNombre()}"></span></td>
+                <td><span th:text="${tarea.getDescripcion()}"></span></td>
+                <td><span th:text="${tarea.getCategoria()}"></span></td>
+                <td><span th:text="${tarea.getEstado().getTextoMostrar()}"></span></td>
+                <td><span th:text="${tarea.getFechaTrabajoFormateada()}"></span></td>
+                <td><span th:text="${tarea.getPrivacidad()}"></span></td>
+                <td>[E][X]</td>
+            </tr>
+        </tbody>
+    </table>
+    
 </body>
 </html>

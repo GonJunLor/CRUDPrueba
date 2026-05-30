@@ -10,12 +10,23 @@
     <h1>Estas en el Registro</h1>
     <form action="/registro" method="post">
         <label for="codUsuario">Usuario</label>
-        <input type="text" name="codUsuario" id="codUsuario">
+        <input class="requerido" type="text" name="codUsuario" id="codUsuario" th:value="${valor_codUsuario}" required>
         <span class="error rojo" th:text="${error_codUsuario}"></span>
+
         <label for="contrasena">Contraseña</label>
-        <input type="text" name="contrasena" id="contrasena">
+        <input class="requerido" type="text" name="contrasena" id="contrasena" th:value="${valor_contrasena}" required>
+
+        <label for="contrasena2">Contraseña</label>
+        <input class="requerido" type="text" name="contrasena2" id="contrasena2" th:value="${valor_contrasena2}" required>
+        <span class="error rojo" th:text="${error_contrasena2}"></span>
+
         <label for="descUsuario">Nombre y apellidos</label>
-        <input type="text" name="descUsuario" id="descUsuario">
+        <input class="requerido" type="text" name="descUsuario" id="descUsuario" th:value="${valor_descUsuario}" required>
+
+        <label for="palabraSeguridad">Palabra de seguridad</label>
+        <input class="requerido" type="text" name="palabraSeguridad" id="palabraSeguridad" th:value="${valor_palabraSeguridad}" required>
+        <span class="error rojo" th:text="${error_palabraSeguridad}"></span>
+
         <input type="submit" value="Entrar">
     </form>
     <a href="/">Cancelar</a>

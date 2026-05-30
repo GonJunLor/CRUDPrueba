@@ -1,5 +1,6 @@
 package com.example.CRUDPrueba;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -19,7 +20,10 @@ public class Registro {
 	private UsuarioGestion usuarioBBDD;
 
     @GetMapping("/registro")
-    public String cargarRegistro(HttpSession sesion){
+    public String cargarRegistro(
+        Model modelo,
+        HttpSession sesion
+    ){
 
         // Recuperamos el atributo de la sesión (hay que castearlo a String)
         Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioLogueado");
@@ -29,6 +33,8 @@ public class Registro {
             return "redirect:/privado";
         }
 
+        modelo.addAttribute("valor_codUsuario", "");
+
         return "registro";
     } 
 
@@ -36,20 +42,39 @@ public class Registro {
     public String crearUsuario(
         @RequestParam(value = "codUsuario", defaultValue = "") String codUsuario,
         @RequestParam(value = "contrasena", defaultValue = "") String contrasena,
+        @RequestParam(value = "contrasena2", defaultValue = "") String contrasena2,
         @RequestParam(value = "descUsuario", defaultValue = "") String descUsuario,
+        @RequestParam(value = "palabraSeguridad", defaultValue = "") String palabraSeguridad,
         Model modelo,
         HttpSession sesion
     ){
+        boolean validaOK = true;
+
+        // Comprobación de la palabra de seguridad
+        if(!BCrypt.checkpw(palabraSeguridad, "$2a$10$DNUYSMUhFX1xQf/ONd1wxebBZCVSP6bNu3xyMX1JVODW4aOXlHfZ2")){
+            modelo.addAttribute("error_palabraSeguridad", "Palabra de seguridad incorrecta");
+            validaOK = false;
+        }
+
+        // Si existe el usuario lanzamos un mensaje de error
         if (usuarioBBDD.existsByCodUsuario(codUsuario)) {
-            // Si existe el usuario lanzamos un mensaje de error
             modelo.addAttribute("error_codUsuario", "El usuario ya existe");
-        } else {
-            // Si no existe el usuario lo creamos y vamos a inicio privado
+            validaOK = false;
+        } 
+
+        // Si las contraseñas son distintas lanzamos el error
+        if (!contrasena.equals(contrasena2)) {
+            modelo.addAttribute("error_contrasena2", "Las contraseñas no son iguales");
+            validaOK = false;
+        }
+
+        // Si ha pasado las validaciones, creamos el usuario y vamos a inicio privado
+        if (validaOK) {
             Usuario nuevoUsuario = new Usuario();
             nuevoUsuario.setCodUsuario(codUsuario);
             nuevoUsuario.setContrasena(BCrypt.hashpw(contrasena, BCrypt.gensalt()));
             nuevoUsuario.setDescUsuario(descUsuario);
-            nuevoUsuario.setFechaHoraUltimaConexion(new Date());
+            nuevoUsuario.setFechaHoraUltimaConexion(LocalDate.now());
             nuevoUsuario.setPerfil("Usuario");
 
             usuarioBBDD.save(nuevoUsuario);
@@ -59,6 +84,13 @@ public class Registro {
             
             return "redirect:/privado";
         }
+
+        // Si no pasa las validaciones devolvemos los datos al formulario.
+        modelo.addAttribute("valor_codUsuario", codUsuario);
+        modelo.addAttribute("valor_contrasena", contrasena);
+        modelo.addAttribute("valor_contrasena2", contrasena2);
+        modelo.addAttribute("valor_descUsuario", descUsuario);
+        modelo.addAttribute("valor_palabraSeguridad", palabraSeguridad);
 
         return "registro";
     }
