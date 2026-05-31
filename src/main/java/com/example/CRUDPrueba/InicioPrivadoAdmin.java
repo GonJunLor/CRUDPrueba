@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Controller
-public class InicioPrivado {
+public class InicioPrivadoAdmin {
 
     @Autowired
     private TareaGestion tareaBBDD;
-    
-    @GetMapping("/privado")
-    public String cargarInicioPrivado(
+    @Autowired
+    private UsuarioGestion usuarioBBDD;
+
+    @GetMapping("/privadoAdmin")
+    public String cargarInicioPrivadoAdmin(
         Model modelo,
         HttpSession sesion
     ){
@@ -32,11 +32,11 @@ public class InicioPrivado {
             return "redirect:/login";
         }
 
-        List<Tarea> tareas = tareaBBDD.findByUsuario(usuario);
-        for (Tarea tarea : tareas) {
-            System.out.println(tarea);
-        }
+        Iterable<Tarea> tareas = tareaBBDD.findAll();
+        Iterable<Usuario> usuarios = usuarioBBDD.findAll();
+
         modelo.addAttribute("tareas", tareas);
+        modelo.addAttribute("usuarios", usuarios);
 
         modelo.addAttribute("valor_nombre", "");
         modelo.addAttribute("valor_categoria", "");
@@ -47,18 +47,15 @@ public class InicioPrivado {
         modelo.addAttribute("estados", Estado.values());
         modelo.addAttribute("nombreCompleto",usuario.getDescUsuario());
 
-        if (usuario.getPerfil().equals("Admin")) {
-            return "redirect:/privadoAdmin";
-        }
-
-        return "inicioPrivado";
+        return "inicioPrivadoAdmin";
     }
 
-    @PostMapping("/privado")
-    public String manejarDatosFormularioPost(
+    @PostMapping("/privadoAdmin")
+    public String manejarDatosFormularioPostAdmin(
         @RequestParam(value = "nom", defaultValue = "") String nombre,
         @RequestParam(value = "formCategoria", defaultValue = "") String formCategoria,
         @RequestParam(value = "formEstado", required = false) Estado formEstado,
+        @RequestParam(value = "formUsuario", required = false) Long formUsuarioId,
         Model modelo,
         HttpSession sesion
     ){
@@ -70,15 +67,25 @@ public class InicioPrivado {
             return "redirect:/login";
         }
 
-        List<Tarea> tareas = tareaBBDD.filtrarTareasDinamico(
-            usuario, nombre, formCategoria, formEstado
+        // Buscamos el objeto Usuario real si se seleccionó uno en el combo
+        Usuario formUsuario = null;
+        if (formUsuarioId != null) {
+            // Asumiendo que tu usuarioBBDD tiene findById o findById(...).orElse(null)
+            formUsuario = usuarioBBDD.findById(formUsuarioId).orElse(null); 
+        }
+
+        List<Tarea> tareas = tareaBBDD.filtrarTareasDinamicoAdmin(
+            formUsuario, nombre, formCategoria, formEstado
         );
+        Iterable<Usuario> usuarios = usuarioBBDD.findAll();
 
         modelo.addAttribute("tareas", tareas);
+        modelo.addAttribute("usuarios", usuarios);
 
         modelo.addAttribute("valor_nombre", nombre);
         modelo.addAttribute("valor_categoria", formCategoria);
         modelo.addAttribute("valor_estado", formEstado);
+        modelo.addAttribute("valor_usuario", formUsuario);
         modelo.addAttribute("fechaUltimaConexionAnterior", sesion.getAttribute("fechaUltimaConexionAnterior"));
 
         modelo.addAttribute("categorias", Categoria.values());
@@ -87,7 +94,6 @@ public class InicioPrivado {
 
         System.out.println("Categoria: " + formCategoria + ", estado: " + (formEstado == null? "" : formEstado.getTextoMostrar()) );
 
-        return "inicioPrivado";
+        return "inicioPrivadoAdmin";
     }
-
 }

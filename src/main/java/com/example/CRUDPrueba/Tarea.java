@@ -69,7 +69,6 @@ public class Tarea {
     public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
-    // Dentro de tu clase Tarea.java
     public String getFechaTrabajoFormateada() {
         if (this.fechaTrabajo == null) {
             return "--";

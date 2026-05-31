@@ -1,6 +1,7 @@
 package com.example.CRUDPrueba;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -55,12 +56,40 @@ public class Registro {
             modelo.addAttribute("error_palabraSeguridad", "Palabra de seguridad incorrecta");
             validaOK = false;
         }
-
+        
         // Si existe el usuario lanzamos un mensaje de error
         if (usuarioBBDD.existsByCodUsuario(codUsuario)) {
             modelo.addAttribute("error_codUsuario", "El usuario ya existe");
             validaOK = false;
         } 
+
+        String errorUsuario = "El codigo de usuario: "; 
+        // El codUsuario tiene que ser una palabra solo
+        if (codUsuario.contains(" ")) {
+            errorUsuario += "Tiene que ser una palabra sin espacios. ";
+            modelo.addAttribute("error_codUsuario", errorUsuario);
+            validaOK = false;
+        }
+
+        // El codUsuario tiene que tener más de tres letras.
+        if (codUsuario.length()<4) {
+            errorUsuario += "Tiene que tener más de tres letras. ";
+            modelo.addAttribute("error_codUsuario", errorUsuario);
+            validaOK = false;
+        }
+
+        String errorContrasena = "La contraseña: ";
+        if (contrasena.contains(" ")) {
+            errorContrasena += "Tiene que ser una palabra sin espacios. ";
+            modelo.addAttribute("error_contrasena", errorContrasena);
+            validaOK = false;
+        }
+
+        if (contrasena.length()<5) {
+            errorContrasena += "Tiene que tener más de cuatro caracteres. ";
+            modelo.addAttribute("error_contrasena", errorContrasena);
+            validaOK = false;
+        }
 
         // Si las contraseñas son distintas lanzamos el error
         if (!contrasena.equals(contrasena2)) {
@@ -81,6 +110,7 @@ public class Registro {
 
             // Guardamos el estado de usuario logueado en la sesión privada de éste usuario
             sesion.setAttribute("usuarioLogueado", nuevoUsuario);
+            sesion.setAttribute("fechaUltimaConexionAnterior", "Ninguna");
             
             return "redirect:/privado";
         }

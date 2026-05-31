@@ -15,6 +15,7 @@
 
         <label for="contrasena">Contraseña</label>
         <input class="requerido" type="text" name="contrasena" id="contrasena" th:value="${valor_contrasena}" required>
+        <span class="error rojo" th:text="${error_contrasena}"></span>
 
         <label for="contrasena2">Contraseña</label>
         <input class="requerido" type="text" name="contrasena2" id="contrasena2" th:value="${valor_contrasena2}" required>

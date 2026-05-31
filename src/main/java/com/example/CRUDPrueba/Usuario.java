@@ -1,6 +1,7 @@
 package com.example.CRUDPrueba;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -56,6 +57,12 @@ public class Usuario {
     }
     public void setPerfil(String perfil) {
         this.perfil = perfil;
+    }
+    public String getFechaHoraUltimaConexionFormateada() {
+        if (this.fechaHoraUltimaConexion == null) {
+            return "--";
+        }
+        return this.fechaHoraUltimaConexion.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
     public LocalDate getFechaHoraUltimaConexion() {
         return fechaHoraUltimaConexion;
