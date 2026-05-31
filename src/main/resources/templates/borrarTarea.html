@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <title>Borrar tarea</title>
+</head>
+<body>
+    <h1>¿Seguro que quieres borrar la tarea <span th:text="${valor_nombre}"></span>?</h1>
+    <form action="/borrarTarea" method="post">
+        <input type="hidden" name="idTarea" id="idTarea" th:value="${valor_id}">
+
+        <input type="checkbox" name="hecho" id="hecho" th:checked="${valor_hecho}" class="checkbox-bloqueado">
+        <label for="hecho">Completado</label>
+
+        <label for="descripcion">Descripción</label>
+        <input type="text" name="descripcion" id="descripcion" th:value="${valor_descripcion}" readonly>
+
+        <label for="categoria">Categoria</label>
+        <input type="text" name="categoria" id="categoria" th:value="${valor_categoria}" readonly>
+
+        <label for="estado">Estado</label>
+        <input type="text" name="estado" id="estado" th:value="${valor_estado}" readonly>
+
+        <label for="fechaTrabajo">Fecha de trabajo</label>
+        <input type="date" name="fechaTrabajo" id="fechaTrabajo" th:value="${valor_fechaTrabajo}" readonly>
+
+        <input type="submit" value="Aceptar">
+    </form>
+    <a href="/privado">Cancelar</a>
+</body>
+</html>
