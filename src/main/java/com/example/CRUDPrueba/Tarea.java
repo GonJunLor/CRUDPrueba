@@ -89,6 +89,10 @@ public class Tarea {
         this.fechaFinal = fechaFinal;
     }
 
+    public String getStringEstado(){
+        return this.estado == null ? "--" : estado.getTextoMostrar();
+    }
+
     public Estado getEstado() {
         return estado;
     }

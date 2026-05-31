@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Inicio Privado</title>
 </head>
 <body>
@@ -43,7 +44,7 @@
                 <th>Estado</th>
                 <th>Fecha trabajo</th>
                 <th>Privacidad</th>
-                <th>Iconos</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -55,7 +56,18 @@
                 <td><span th:text="${tarea.getEstado().getTextoMostrar()}"></span></td>
                 <td><span th:text="${tarea.getFechaTrabajoFormateada()}"></span></td>
                 <td><span th:text="${tarea.getPrivacidad()}"></span></td>
-                <td>[E][X]</td>
+                <td>
+                    <form action="/verTarea" method="post" class="iconoEditar">
+                        <button type="submit" name="idTareaBoton" id="idTareaBoton" th:value="${tarea.getId()}">
+                            <i class="fas fa-edit" style="color: #007bff; font-size: 18px;"></i>
+                        </button>
+                    </form>
+                    <form action="/verBorrarTarea" method="post" class="iconoEditar">
+                        <button type="submit" name="idTareaBoton" id="idTareaBoton" th:value="${tarea.getId()}">
+                            <i class="fas fa-trash-can" style="color: #bf0000; font-size: 18px;"></i>
+                        </button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>

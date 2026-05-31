@@ -18,3 +18,15 @@ form{
     min-width: 600px;
     flex-direction: column;
 }
+.iconoEditar{
+    display: inline;
+}
+.iconoEditar button{
+    background:none; 
+    border:none; 
+    cursor:pointer; 
+    padding:0;
+}
+.checkbox-bloqueado {
+    pointer-events: none;
+}
