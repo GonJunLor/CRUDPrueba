@@ -1,8 +1,6 @@
 package com.example.CRUDPrueba;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,8 +83,8 @@ public class Registro {
             validaOK = false;
         }
 
-        if (contrasena.length()<5) {
-            errorContrasena += "Tiene que tener más de cuatro caracteres. ";
+        if (contrasena.length()<4) {
+            errorContrasena += "Tiene que tener cuatro o más caracteres. ";
             modelo.addAttribute("error_contrasena", errorContrasena);
             validaOK = false;
         }

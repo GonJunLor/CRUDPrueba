@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UsuarioGestion extends CrudRepository<Usuario, Long>{
+
+    Usuario findById(long id);
     
     // Spring entiende que quieres hacer un "SELECT * FROM usuarios WHERE nombre = ?"
     Usuario findFirstByCodUsuario(String codUsuario);

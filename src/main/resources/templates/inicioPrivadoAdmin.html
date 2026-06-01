@@ -103,12 +103,12 @@
                 <td><span th:text="${usuario.perfil}"></span></td>
                 <td>
                     <form action="/verUsuario" method="post" class="iconoEditar">
-                        <button type="submit" name="idTareaBoton" th:value="${usuario.id}">
+                        <button type="submit" name="idUsuarioBoton" th:value="${usuario.id}">
                             <i class="fas fa-edit" style="color: #007bff; font-size: 18px;"></i>
                         </button>
                     </form>
                     <form action="/verBorrarUsuario" method="post" class="iconoEditar">
-                        <button type="submit" name="idTareaBoton"  th:value="${usuario.id}">
+                        <button type="submit" name="idUsuarioBoton"  th:value="${usuario.id}">
                             <i class="fas fa-trash-can" style="color: #bf0000; font-size: 18px;"></i>
                         </button>
                     </form>
