@@ -1,5 +1,7 @@
 package com.example.CRUDPrueba;
 
+import java.time.LocalDate;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,13 +43,23 @@ public class Login {
         Usuario usuario = usuarioBBDD.findFirstByCodUsuario(codUsuario);
         
         // Comprobamos la contraseña con el método de la libreria BCrypt
-        if (usuario!=null && BCrypt.checkpw(contrasena, usuario.getContrasena())) {
+        if (
+            usuario!=null 
+            && BCrypt.checkpw(contrasena, usuario.getContrasena()) 
+        ) {
             
             // Guardamos el estado de usuario logueado en la sesión privada de éste usuario
             sesion.setAttribute("usuarioLogueado", usuario);
+            sesion.setAttribute("fechaUltimaConexionAnterior", usuario.getFechaHoraUltimaConexionFormateada());
 
-            // return "redirect:/privado";
-            return "redirect:/privado";
+            usuario.setFechaHoraUltimaConexion(LocalDate.now());
+            usuarioBBDD.save(usuario);
+
+            if (usuario.getPerfil().equals("Usuario")) {
+                return "redirect:/privado";
+            } else {
+                return "redirect:/privadoAdmin";
+            }
         }
         return "login";
     }

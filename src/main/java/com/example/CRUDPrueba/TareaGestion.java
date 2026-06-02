@@ -32,4 +32,16 @@ public interface TareaGestion extends CrudRepository<Tarea, Long> {
         @Param("categoria") String categoria, 
         @Param("estado") Estado estado
     );
+
+    @Query("SELECT t FROM Tarea t WHERE " +
+            "(:usuario IS NULL OR t.usuario = :usuario) " +
+            "AND (:nombre = '' OR LOWER(t.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))) " +
+            "AND (:categoria = '' OR t.categoria = :categoria) " +
+            "AND (:estado IS NULL OR t.estado = :estado)")
+    List<Tarea> filtrarTareasDinamicoAdmin(
+        @Param("usuario") Usuario usuario, 
+        @Param("nombre") String nombre, 
+        @Param("categoria") String categoria, 
+        @Param("estado") Estado estado
+    );
 }

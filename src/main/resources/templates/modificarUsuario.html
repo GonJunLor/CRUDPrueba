@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <title>Modificar usuario</title>
+</head>
+<body>
+    <h1>Estas modificando el usuario <span th:text="${valor_codUsuario}"></span></h1>
+    <h2><span th:text="${mensaje_confirmacion}"></span></h2>
+    <form action="/modificarUsuario" method="post">
+        <input type="hidden" name="idUsuario" th:value="${valor_id}">
+
+        <label for="codUsuario">Usuario</label>
+        <input type="text" name="codUsuario" id="codUsuario" th:value="${valor_codUsuario}">
+        <span class="error rojo" th:text="${error_codUsuario}"></span>
+
+        <label for="contrasena">Nueva Contraseña</label>
+        <input type="password" name="contrasena" id="contrasena" th:value="${valor_contrasena}">
+        <span class="error rojo" th:text="${error_contrasena}"></span>
+
+        <label for="contrasena2">Repite Contraseña</label>
+        <input type="password" name="contrasena2" id="contrasena2" th:value="${valor_contrasena2}">
+        <span class="error rojo" th:text="${error_contrasena2}"></span>
+
+        <label for="descUsuario">Nombre y apellidos</label>
+        <input type="text" name="descUsuario" id="descUsuario" th:value="${valor_descUsuario}">
+
+        <label for="perfil">Perfil:</label>
+        <input type="radio" id="usuario" name="perfil" value="Usuario" th:checked="${valor_perfil.equals('Usuario')}">
+        <label for="privado">Usuario</label>
+        <input type="radio" id="admin" name="perfil" value="Admin" th:checked="${valor_perfil.equals('Admin')}">
+        <label for="publico">Administrador</label>
+
+        <input type="submit" value="Guardar">
+    </form>
+    <a href="/privado">Volver</a>
+</body>
+</html>

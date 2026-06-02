@@ -14,10 +14,11 @@
         <span class="error rojo" th:text="${error_codUsuario}"></span>
 
         <label for="contrasena">Contraseña</label>
-        <input class="requerido" type="text" name="contrasena" id="contrasena" th:value="${valor_contrasena}" required>
+        <input class="requerido" type="password" name="contrasena" id="contrasena" th:value="${valor_contrasena}" required>
+        <span class="error rojo" th:text="${error_contrasena}"></span>
 
-        <label for="contrasena2">Contraseña</label>
-        <input class="requerido" type="text" name="contrasena2" id="contrasena2" th:value="${valor_contrasena2}" required>
+        <label for="contrasena2">Repite Contraseña</label>
+        <input class="requerido" type="password" name="contrasena2" id="contrasena2" th:value="${valor_contrasena2}" required>
         <span class="error rojo" th:text="${error_contrasena2}"></span>
 
         <label for="descUsuario">Nombre y apellidos</label>

@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>Hola <span th:text="${nombreCompleto}"></span>, ésta es tu área privada</h1>
+    <h2>Ultima conexión: <span th:text="${fechaUltimaConexionAnterior}"></span></h2>
     <a href="/crearTarea">Crear tarea</a>
     <form action="/privado" method="post">
         <input type="text" name="nom" id="nom" th:value="${valor_nombre}">
