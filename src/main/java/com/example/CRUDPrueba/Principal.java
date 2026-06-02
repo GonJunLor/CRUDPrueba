@@ -49,4 +49,9 @@ public class Principal {
 
 		return "redirect:/";
 	}
+
+	@GetMapping("/error")
+	public String controlError(){
+		return "error";
+	}
 }

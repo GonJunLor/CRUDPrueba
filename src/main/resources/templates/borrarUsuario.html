@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <title>Borrar usuario</title>
+</head>
+<body>
+    <h1>Estas borrando el usuario <span th:text="${valor_codUsuario}"></span> y todas sus tareas</h1>
+
+    <form action="/borrarUsuario" method="post">
+        <input type="hidden" name="idUsuario" th:value="${valor_id}">
+
+        <label for="codUsuario">Usuario</label>
+        <input type="text" name="codUsuario" id="codUsuario" th:value="${valor_codUsuario}">
+
+        <label for="descUsuario">Nombre y apellidos</label>
+        <input type="text" name="descUsuario" id="descUsuario" th:value="${valor_descUsuario}">
+
+        <label for="perfil">Perfil</label>
+        <input type="text" name="perfil" id="perfil" th:value="${valor_perfil}">
+
+        <input type="submit" value="Aceptar">
+    </form>
+    <a href="/privado">Cancelar</a>
+</body>
+</html>

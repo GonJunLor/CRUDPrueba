@@ -7,7 +7,7 @@
     <title>Modificar usuario</title>
 </head>
 <body>
-    <h1>Estas modificando el usuario <span th:${valor_descUsuario}></span></h1>
+    <h1>Estas modificando el usuario <span th:text="${valor_codUsuario}"></span></h1>
     <h2><span th:text="${mensaje_confirmacion}"></span></h2>
     <form action="/modificarUsuario" method="post">
         <input type="hidden" name="idUsuario" th:value="${valor_id}">
@@ -33,9 +33,8 @@
         <input type="radio" id="admin" name="perfil" value="Admin" th:checked="${valor_perfil.equals('Admin')}">
         <label for="publico">Administrador</label>
 
-        <input type="submit" value="Entrar">
+        <input type="submit" value="Guardar">
     </form>
-    <a href="/">Cancelar</a>
     <a href="/privado">Volver</a>
 </body>
 </html>
