@@ -7,7 +7,8 @@
     <title>Registro</title>
 </head>
 <body>
-    <h1>Estas en el Registro</h1>
+    <h1>Registro de nuevo usuario</h1>
+    <a href="/login">Volver a login</a>
     <form action="/registro" method="post">
         <label for="codUsuario">Usuario</label>
         <input class="requerido" type="text" name="codUsuario" id="codUsuario" th:value="${valor_codUsuario}" required>
@@ -30,7 +31,5 @@
 
         <input type="submit" value="Entrar">
     </form>
-    <a href="/">Cancelar</a>
-    <a href="/login">Volver a login</a>
 </body>
 </html>

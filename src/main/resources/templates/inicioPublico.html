@@ -9,9 +9,9 @@
 </head>
 <body>
     <h1>Inicio público</h1>
-    <a href="/login">Iniciar Sesión</a>
+    <a href="/login" th:if="${texto_sesion == 'no iniciada'}">Iniciar Sesión</a>
+    <a href="/cerrar" th:if="${texto_sesion == 'iniciada'}">Cerrar Sesión</a>
     <a href="/privado">Ir a inicio privado</a>
-    <h2>Bienvenido a inicio público <span th:text="${mensajeConexionBBDD}"></span></h2>
 
     <table>
         <thead>

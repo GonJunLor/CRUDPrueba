@@ -30,8 +30,19 @@ public class Principal {
 	@GetMapping("/")
     public String hello(
 		@RequestParam(value = "name", defaultValue = "World") String name,
-		Model modelo
+		Model modelo,
+		HttpSession sesion
 	) {
+		// Recuperamos el atributo de la sesión (hay que castearlo a Usuario)
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioLogueado");
+
+        // Si es null (no ha pasado por el login) lo echamos
+        if (usuario==null) {
+			modelo.addAttribute("texto_sesion", "no iniciada");
+        } else {
+			modelo.addAttribute("texto_sesion", "iniciada");
+		}
+
 		List<Tarea> tareas = tareaBBDD.findByPrivacidad("Publica");
 		modelo.addAttribute("tareas", tareas);
 		

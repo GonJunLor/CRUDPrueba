@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Estas modificando el usuario <span th:text="${valor_codUsuario}"></span></h1>
+    <a href="/privado">Volver</a>
     <h2><span th:text="${mensaje_confirmacion}"></span></h2>
     <form action="/modificarUsuario" method="post">
         <input type="hidden" name="idUsuario" th:value="${valor_id}">
@@ -35,6 +36,6 @@
 
         <input type="submit" value="Guardar">
     </form>
-    <a href="/privado">Volver</a>
+    
 </body>
 </html>

@@ -8,6 +8,10 @@
 </head>
 <body>
     <h1>Estas modificando una tarea</h1>
+    <a href="/">Volver a inicio público</a>
+    <a href="/cerrar">Cerrar Sesion</a>
+    <a href="/privado">Volver a inicio privado</a>
+
     <form action="/modificarTarea" method="post">
         <input type="hidden" name="idTarea" id="idTarea" th:value="${valor_id}">
 
@@ -48,8 +52,6 @@
 
         <input type="submit" value="Entrar">
     </form>
-    <a href="/">Salir</a>
-    <a href="/cerrar">Cerrar Sesion</a>
-    <a href="/privado">Volver a inicio privado</a>
+
 </body>
 </html>

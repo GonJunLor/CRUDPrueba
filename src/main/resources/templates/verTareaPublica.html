@@ -7,7 +7,9 @@
     <title>Ver tarea pública</title>
 </head>
 <body>
-    <h1>Estas viendo una tarea pública</h1>
+    <h1>Detalle de tarea pública</h1>
+    <a href="/">Volver</a>
+    
     <form action="/verTareaPublica" method="post">
         <input type="hidden" name="idTarea" id="idTarea" th:value="${valor_id}">
 
@@ -30,6 +32,6 @@
         <input type="date" name="fechaTrabajo" id="fechaTrabajo" th:value="${valor_fechaTrabajo}" readonly>
 
     </form>
-    <a href="/">Volver</a>
+    
 </body>
 </html>

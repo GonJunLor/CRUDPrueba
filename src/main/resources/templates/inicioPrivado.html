@@ -10,7 +10,9 @@
 <body>
     <h1>Hola <span th:text="${nombreCompleto}"></span>, ésta es tu área privada</h1>
     <h2>Ultima conexión: <span th:text="${fechaUltimaConexionAnterior}"></span></h2>
-    <a href="/crearTarea">Crear tarea</a>
+    <a href="/">Volver a inicio público</a>
+    <a href="/cerrar">Cerrar Sesion</a>
+    
     <form action="/privado" method="post">
         <input type="text" name="nom" id="nom" th:value="${valor_nombre}">
         <select name="formCategoria" id="formCategoria">
@@ -31,13 +33,12 @@
         </select>
         <input type="submit" value="buscar">
     </form>
-    <a href="/">Salir</a>
-    <a href="/cerrar">Cerrar Sesion</a>
+    <a href="/crearTarea">Crear tarea</a>
     
     <table>
         <thead>
             <tr>
-                <th></th>
+                <!-- <th></th> -->
                 <th>Nombre</th>
                 <!-- Descripción seguramente la quite y la deje solo en detalle -->
                 <th>Descripción</th>
@@ -50,7 +51,7 @@
         </thead>
         <tbody>
             <tr th:each="tarea : ${tareas}">
-                <td>[*]</td>
+                <!-- <td>[*]</td> -->
                 <td><span th:text="${tarea.getNombre()}"></span></td>
                 <td><span th:text="${tarea.getDescripcion()}"></span></td>
                 <td><span th:text="${tarea.getCategoria()}"></span></td>
