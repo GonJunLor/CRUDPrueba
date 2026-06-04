@@ -1,0 +1,182 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO (Material Design Light Palette)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #3f51b5;       /* Azul Índigo institucional */
+    --primary-hover: #303f9f;       /* Azul más oscuro para el hover */
+    --bg-color: #f5f5f5;            /* Fondo gris claro minimalista */
+    --surface-color: #ffffff;       /* Blanco para la tarjeta del login */
+    --text-main: #212121;           /* Texto principal de alta densidad */
+    --text-muted: #757575;          /* Texto secundario para los labels */
+    --border-color: #e0e0e0;        /* Gris de los bordes de los inputs */
+    --shadow-login: 0 10px 20px rgba(0,0,0,0.08), 0 6px 6px rgba(0,0,0,0.12);
+}
+
+/* ==========================================================================
+   2. REGLAS BASE Y ESTRUCTURA CENTRALIZADA
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ==========================================================================
+   3. TÍTULO PRINCIPAL (Encima de la tarjeta)
+   ========================================================================== */
+h1 {
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   4. TARJETA CONTENEDORA DEL FORMULARIO
+   ========================================================================== */
+form {
+    background-color: var(--surface-color);
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-login);
+    
+    /* Configuración interna para apilar elementos */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Campos de etiquetas (Labels) */
+form label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Campos de entrada (Inputs) */
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 24px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #fafafa;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: var(--primary-color);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+}
+
+/* ==========================================================================
+   5. EL BOTÓN "ENTRAR" (Submit dentro del formulario)
+   ========================================================================== */
+form input[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+    margin-bottom: 12px; /* Espacio con el botón Cancelar que se posicionará abajo */
+}
+
+form input[type="submit"]:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+form input[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   6. EL ENLACE "CANCELAR" (Transformado en botón plano de Material)
+   ========================================================================== */
+a[href="/"] {
+    display: block;
+    width: 100%;
+    max-width: 400px; /* Mismo ancho que el formulario */
+    text-align: center;
+    text-decoration: none;
+    
+    /* Clonamos las dimensiones del botón superior */
+    padding: 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    
+    /* Estilo Flat/Plano de Material para acciones de retroceso */
+    background-color: transparent;
+    color: #757575; /* Gris intermedio */
+    border: 1px solid var(--border-color);
+    
+    /* Ajuste de posición: lo pegamos visualmente debajo de la tarjeta */
+    margin-top: -12px; 
+    background-color: var(--surface-color);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    
+    transition: background-color 0.2s, color 0.2s;
+}
+
+a[href="/"]:hover {
+    background-color: #f4f4f4;
+    color: #212121;
+}
+
+/* ==========================================================================
+   7. EL ENLACE "REGISTRARSE" (Fuera, abajo del todo como acción secundaria)
+   ========================================================================== */
+a[href="/registro"] {
+    display: inline-block;
+    margin-top: 32px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+a[href="/registro"]:hover {
+    background-color: rgba(63, 81, 181, 0.08); /* Sutil feedback azul */
+    text-decoration: underline;
+}

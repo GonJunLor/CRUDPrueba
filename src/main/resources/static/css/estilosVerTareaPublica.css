@@ -1,0 +1,170 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO (Estilo unificado Material Design)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght=300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #3f51b5;       /* Azul Índigo institucional */
+    --bg-color: #f5f5f5;            /* Fondo gris claro */
+    --surface-color: #ffffff;       /* Blanco para la tarjeta */
+    --text-main: #212121;           /* Texto de alta prioridad */
+    --text-muted: #666666;          /* Texto secundario para etiquetas */
+    --border-readonly: #dcdcdc;     /* Gris para los bordes bloqueados */
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ==========================================================================
+   2. REGLAS BASE Y ENTORNO
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 40px 20px; /* Margen superior cómodo al no llevar header fijo */
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+/* Estilización del enlace "Volver" como un botón plano sutil debajo del título */
+a[href="/"] {
+    display: block;
+    width: max-content;
+    margin: 0 auto 32px auto;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 16px;
+    border: 1px solid var(--border-readonly);
+    border-radius: 4px;
+    background-color: var(--surface-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    transition: background-color 0.2s;
+}
+
+a[href="/"]:hover {
+    background-color: #f1f3f9;
+}
+
+/* Contenedor del formulario centralizado */
+form {
+    background-color: var(--surface-color);
+    width: 100%;
+    max-width: 950px; 
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    border-top: 4px solid var(--primary-color); /* Línea azul: Vista pura de consulta */
+    
+    /* Mismo sistema de dos columnas enfrentadas */
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 40px;
+}
+
+/* Estilo de etiquetas (Labels) */
+form label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    margin-top: 4px;
+}
+
+/* ==========================================================================
+   3. ESTILO EXCLUSIVO "READONLY" (SOLO LECTURA) PARA INPUTS
+   ========================================================================== */
+form input[readonly],
+form input[type="date"] {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1px solid var(--border-readonly);
+    border-style: dashed;     /* Estilo discontinuo clásico de Material para campos fijos */
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    background-color: #f9f9f9; /* Fondo ligeramente apagado */
+    color: #444444;           /* Color de fuente de lectura claro */
+    margin-bottom: 18px;
+    cursor: not-allowed;      /* Cursor con símbolo de prohibido al pasar el ratón */
+    pointer-events: none;     /* Desactiva clics accidentales en el input de fecha */
+}
+
+/* ==========================================================================
+   4. COLUMNA IZQUIERDA (Contenido Fijo de la Tarea)
+   ========================================================================== */
+form > div:nth-of-type(1) {
+    flex: 1.2;                /* Conserva mayor espacio para título y descripción */
+    min-width: 320px;
+}
+
+/* Caja del Checkbox de Completado de 22x22px y Centrado */
+form input[type="checkbox"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--text-muted);
+    border-radius: 4px;
+    
+    display: block;
+    margin: 0 auto 24px auto; /* Centrado horizontal milimétrico */
+    position: relative;
+    
+    cursor: not-allowed;
+    pointer-events: none;     /* Anula la capacidad de interactuar con el check */
+}
+
+/* Estado visual del check si la tarea pública está completada */
+form input[type="checkbox"]:checked {
+    background-color: #79a47b; /* Verde más pálido/atenuado indicando lectura */
+    border-color: #79a47b;
+}
+
+form input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    left: 4px;
+    top: -1px;
+}
+
+/* Caja de descripción simulada en formato amplio */
+form input#descripcion {
+    padding-bottom: 80px;     /* Imita un cuadro de texto extenso */
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   5. COLUMNA DERECHA (Metadatos e Información)
+   ========================================================================== */
+form > div:nth-of-type(2) {
+    flex: 1;                  /* Columna derecha proporcional */
+    min-width: 320px;
+}
+
+/* Forzamos que el último input de fecha remueva su margen inferior */
+form div:nth-of-type(2) input[type="date"] {
+    margin-bottom: 0;
+}

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <link rel="stylesheet" th:href="@{/css/estilosRegistro.css}">
     <title>Registro</title>
 </head>
 <body>
-    <h1>Estas en el Registro</h1>
+    <h1>Registro de nuevo usuario</h1>
     <form action="/registro" method="post">
         <label for="codUsuario">Usuario</label>
         <input class="requerido" type="text" name="codUsuario" id="codUsuario" th:value="${valor_codUsuario}" required>
@@ -30,7 +30,6 @@
 
         <input type="submit" value="Entrar">
     </form>
-    <a href="/">Cancelar</a>
     <a href="/login">Volver a login</a>
 </body>
 </html>

@@ -1,0 +1,239 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO (Estilo unificado de Edición)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght=300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #3f51b5;       /* Azul Índigo institucional */
+    --primary-hover: #303f9f;       /* Azul oscuro */
+    --edit-color: #ff9800;          /* Naranja que representa modo Edición */
+    --bg-color: #f5f5f5;            /* Fondo gris claro */
+    --surface-color: #ffffff;       /* Blanco para la tarjeta */
+    --text-main: #212121;           /* Texto de alta prioridad */
+    --text-muted: #666666;          /* Texto secundario para etiquetas */
+    --border-color: #e0e0e0;        /* Gris de los bordes */
+    --error-color: #d32f2f;         /* Rojo de validaciones */
+    --success-color: #2e7d32;       /* Verde para mensajes de éxito */
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ==========================================================================
+   2. REGLAS BASE Y ENTORNO
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ==========================================================================
+   3. TEXTOS Y ENLACES SUPERIORES
+   ========================================================================== */
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+h1 span {
+    font-weight: 700;
+}
+
+/* Enlace "Volver" estilizado como botón plano */
+a[href="/privado"] {
+    display: inline-block;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--surface-color);
+    margin-bottom: 20px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+a[href="/privado"]:hover {
+    background-color: #f5f5f5;
+    color: var(--text-main);
+}
+
+/* Mensaje dinámico de confirmación (Thymeleaf) */
+h2 {
+    width: 100%;
+    max-width: 460px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+h2 span {
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--success-color);
+    background-color: #e8f5e9;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid #c8e6c9;
+}
+
+/* Ocultar el bloque de confirmación si viene vacío desde el servidor */
+h2 span:empty {
+    display: none;
+}
+
+/* ==========================================================================
+   4. TARJETA FORMULARIO (Una columna compacta)
+   ========================================================================== */
+form {
+    background-color: var(--surface-color);
+    width: 100%;
+    max-width: 460px; 
+    padding: 32px 40px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    border-top: 4px solid var(--edit-color); /* Línea naranja de edición */
+    
+    display: flex;
+    flex-direction: column;
+}
+
+/* Etiquetas (Labels) */
+form label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+/* Campos de entrada */
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    background-color: #fafafa;
+    margin-bottom: 18px;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: var(--primary-color);
+    background-color: white;
+}
+
+/* Control estricto de espacios cuando hay un span de error debajo */
+form input + span.error {
+    margin-top: -14px;
+}
+
+/* Mensajes de error de Thymeleaf */
+form span.error {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--error-color);
+    margin-bottom: 14px;
+    padding-left: 2px;
+}
+
+/* ==========================================================================
+   5. BOTONES DE RADIO (Perfil de Usuario en Horizontal)
+   ========================================================================== */
+form label[for="perfil"] {
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+
+/* Contenedor Flexbox para alinear los radios en una sola fila */
+form > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+form > div input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--text-muted);
+    border-radius: 50%;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    margin: 0;
+    transition: border-color 0.2s;
+}
+
+form > div input[type="radio"]:checked {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    box-shadow: inset 0 0 0 3px white;
+}
+
+/* Etiquetas internas (Usuario / Administrador) */
+form > div label {
+    font-size: 0.95rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text-main);
+    cursor: pointer;
+    margin-right: 20px;
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   6. BOTÓN ACCIÓN DE GUARDAR
+   ========================================================================== */
+form input[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+    margin-top: 4px;
+}
+
+form input[type="submit"]:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+form input[type="submit"]:active {
+    transform: scale(0.98);
+}

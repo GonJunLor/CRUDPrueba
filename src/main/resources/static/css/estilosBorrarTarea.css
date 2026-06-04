@@ -1,0 +1,198 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO (Material Design Palette - Modo Alerta/Peligro)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght=300;400;500;700&display=swap');
+
+:root {
+    --danger-color: #d32f2f;        /* Rojo estándar de Material para acciones destructivas */
+    --danger-hover: #b71c1c;        /* Rojo más oscuro para el hover */
+    --bg-color: #f5f5f5;            /* Fondo gris claro */
+    --surface-color: #ffffff;       /* Blanco para la tarjeta */
+    --text-main: #212121;           /* Texto principal de alta prioridad */
+    --text-muted: #757575;          /* Texto secundario para etiquetas */
+    --border-readonly: #e0e0e0;     /* Gris para los bordes bloqueados */
+    --shadow-card: 0 10px 20px rgba(0,0,0,0.08), 0 6px 6px rgba(0,0,0,0.12);
+}
+
+/* ==========================================================================
+   2. REGLAS BASE Y ENTORNO CENTRALIZADO
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+/* ==========================================================================
+   3. TÍTULO DE ADVERTENCIA (Encima de la tarjeta)
+   ========================================================================== */
+h1 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: center;
+    max-width: 500px;
+    margin-bottom: 24px;
+    line-height: 1.4;
+}
+
+/* Resaltado del nombre dinámico de la tarea en color rojo */
+h1 span {
+    color: var(--danger-color);
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   4. TARJETA CONTENEDORA DEL FORMULARIO (Compacta a una columna)
+   ========================================================================== */
+form {
+    background-color: var(--surface-color);
+    width: 100%;
+    max-width: 500px; /* Tamaño contenido para cajas de diálogo de confirmación */
+    padding: 32px 40px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    border-top: 4px solid var(--danger-color); /* Línea decorativa roja de peligro */
+    
+    display: flex;
+    flex-direction: column;
+}
+
+/* Etiquetas generales */
+form label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+/* Estilo unificado de lectura para los campos */
+form input[type="text"],
+form input[type="date"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-readonly);
+    border-style: dashed;     /* Formato discontinuo que indica inhabilitado */
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: #555555;
+    background-color: #fafafa;
+    margin-bottom: 16px;
+    outline: none;
+    cursor: not-allowed;      /* Cursor con símbolo de prohibido */
+    pointer-events: none;     /* Blindaje total contra interacciones */
+}
+
+/* ==========================================================================
+   5. CONTROL DEL CHECKBOX DE DETALLE (22x22px y Centrado)
+   ========================================================================== */
+form input[type="checkbox"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--text-muted);
+    border-radius: 4px;
+    
+    display: block;
+    margin: 0 auto 20px auto; /* Centrado horizontal en la tarjeta */
+    position: relative;
+    
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Aspecto visual si la tarea a borrar estaba completada */
+form input[type="checkbox"]:checked {
+    background-color: #79a47b; /* Verde apagado/lectura */
+    border-color: #79a47b;
+}
+
+form input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    left: 4px;
+    top: -1px;
+}
+
+/* ==========================================================================
+   6. BOTONES DE ACCIÓN INFERIORES (Alineados horizontalmente con Flexbox)
+   ========================================================================== */
+/* Creamos una capa flexbox al final para sentar Aceptar y Cancelar juntos */
+form::after {
+    content: '';
+}
+
+/* Seleccionamos los disparadores de acción del final de la página */
+form input[type="submit"],
+a[href="/privado"] {
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+/* Truco avanzado: reordenamos los elementos para que el botón de submit y el 
+   enlace de cancelar (que en el HTML está fuera) se acoplen perfectamente.
+   Como "Cancelar" está fuera en tu HTML, lo estilizamos para que encaje justo abajo.
+*/
+
+/* BOTÓN "ACEPTAR" (Dentro de la tarjeta, abajo del todo) */
+form input[type="submit"] {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 8px;
+    width: 100%;
+}
+
+form input[type="submit"]:hover {
+    background-color: var(--danger-hover);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+form input[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+/* BOTÓN "CANCELAR" (Transformado en botón plano acoplado debajo de la tarjeta) */
+a[href="/privado"] {
+    display: block;
+    width: 100%;
+    max-width: 500px; /* Mismo ancho exacto que la tarjeta */
+    background-color: var(--surface-color);
+    color: #666666;
+    border: 1px solid var(--border-readonly);
+    margin-top: -8px; /* Lo encaja de forma magnética al borde inferior de la tarjeta */
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+a[href="/privado"]:hover {
+    background-color: #f5f5f5;
+    color: #212121;
+}
