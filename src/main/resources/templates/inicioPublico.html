@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,41 +8,46 @@
     <title>Inicio Público</title>
 </head>
 <body>
-    <h1>Inicio público</h1>
-    <a href="/login" th:if="${texto_sesion == 'no iniciada'}">Iniciar Sesión</a>
-    <a href="/cerrar" th:if="${texto_sesion == 'iniciada'}">Cerrar Sesión</a>
-    <a href="/privado">Ir a inicio privado</a>
+    <header>
+        <h1>Inicio público</h1>
+        <a href="/login" th:if="${texto_sesion == 'no iniciada'}">Iniciar Sesión</a>
+        <a href="/cerrar" th:if="${texto_sesion == 'iniciada'}">Cerrar Sesión</a>
+        <a href="/privado">Ir a inicio privado</a>
+    </header>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <!-- Descripción seguramente la quite y la deje solo en detalle -->
-                <th>Descripción</th>
-                <th>Categoría</th>
-                <th>Estado</th>
-                <th>Fecha trabajo</th>
-                <th>Privacidad</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="tarea : ${tareas}">
-                <td><span th:text="${tarea.getNombre()}"></span></td>
-                <td><span th:text="${tarea.getDescripcion()}"></span></td>
-                <td><span th:text="${tarea.getCategoria()}"></span></td>
-                <td><span th:text="${tarea.getEstado().getTextoMostrar()}"></span></td>
-                <td><span th:text="${tarea.getFechaTrabajoFormateada()}"></span></td>
-                <td><span th:text="${tarea.getPrivacidad()}"></span></td>
-                <td>
-                    <form action="/verTareaPublica" method="post" class="iconoEditar">
-                        <button type="submit" name="idTareaBoton" id="idTareaBoton" th:value="${tarea.getId()}">
-                            <i class="fas fa-eye" style="color: #007bff; font-size: 18px;"></i>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <!-- Descripción seguramente la quite y la deje solo en detalle -->
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Estado</th>
+                    <th>Fecha trabajo</th>
+                    <th>Privacidad</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tarea : ${tareas}">
+                    <td><span th:text="${tarea.getNombre()}"></span></td>
+                    <td><span th:text="${tarea.getDescripcion()}"></span></td>
+                    <td><span th:text="${tarea.getCategoria()}"></span></td>
+                    <td><span th:text="${tarea.getEstado().getTextoMostrar()}"></span></td>
+                    <td><span th:text="${tarea.getFechaTrabajoFormateada()}"></span></td>
+                    <td><span th:text="${tarea.getPrivacidad()}"></span></td>
+                    <td>
+                        <form action="/verTareaPublica" method="post" class="iconoEditar">
+                            <button type="submit" name="idTareaBoton" id="idTareaBoton" th:value="${tarea.getId()}">
+                                <i class="fas fa-eye" style="color: #007bff; font-size: 18px;"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
 </body>
 </html>

@@ -1,78 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <link rel="stylesheet" th:href="@{/css/estilosInicioPrivado.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Inicio Privado</title>
 </head>
 <body>
-    <h1>Hola <span th:text="${nombreCompleto}"></span>, ésta es tu área privada</h1>
-    <h2>Ultima conexión: <span th:text="${fechaUltimaConexionAnterior}"></span></h2>
-    <a href="/">Volver a inicio público</a>
-    <a href="/cerrar">Cerrar Sesion</a>
-    
-    <form action="/privado" method="post">
-        <input type="text" name="nom" id="nom" th:value="${valor_nombre}">
-        <select name="formCategoria" id="formCategoria">
-            <option value="">-- Todas las categorías --</option>
-            <option th:each="categoria : ${categorias}"
-                    th:value="${categoria}"
-                    th:text="${categoria}"
-                    th:selected="${categoria.toString() == valor_categoria}"
-            ></option>
-        </select>
-        <select name="formEstado" id="formEstado">
-            <option value="">-- Todos los estados --</option>
-            <option th:each="estado : ${estados}"
-                    th:value="${estado}"
-                    th:text="${estado.getTextoMostrar()}"
-                    th:selected="${estado == valor_estado}"
-            ></option>
-        </select>
-        <input type="submit" value="buscar">
-    </form>
-    <a href="/crearTarea">Crear tarea</a>
-    
-    <table>
-        <thead>
-            <tr>
-                <!-- <th></th> -->
-                <th>Nombre</th>
-                <!-- Descripción seguramente la quite y la deje solo en detalle -->
-                <th>Descripción</th>
-                <th>Categoría</th>
-                <th>Estado</th>
-                <th>Fecha trabajo</th>
-                <th>Privacidad</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="tarea : ${tareas}">
-                <!-- <td>[*]</td> -->
-                <td><span th:text="${tarea.getNombre()}"></span></td>
-                <td><span th:text="${tarea.getDescripcion()}"></span></td>
-                <td><span th:text="${tarea.getCategoria()}"></span></td>
-                <td><span th:text="${tarea.getEstado().getTextoMostrar()}"></span></td>
-                <td><span th:text="${tarea.getFechaTrabajoFormateada()}"></span></td>
-                <td><span th:text="${tarea.getPrivacidad()}"></span></td>
-                <td>
-                    <form action="/verTarea" method="post" class="iconoEditar">
-                        <button type="submit" name="idTareaBoton" id="idTareaBoton" th:value="${tarea.getId()}">
-                            <i class="fas fa-edit" style="color: #007bff; font-size: 18px;"></i>
-                        </button>
-                    </form>
-                    <form action="/verBorrarTarea" method="post" class="iconoEditar">
-                        <button type="submit" name="idTareaBoton" id="idTareaBoton" th:value="${tarea.getId()}">
-                            <i class="fas fa-trash-can" style="color: #bf0000; font-size: 18px;"></i>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <header>
+        <h1>Hola <span th:text="${nombreCompleto}"></span>, ésta es tu área privada</h1>
+        <h2>Ultima conexión: <span th:text="${fechaUltimaConexionAnterior}"></span></h2>
+        <a href="/">Volver a inicio público</a>
+        <a href="/cerrar">Cerrar Sesion</a>
+    </header>
+
+    <main>
+        <form action="/privado" method="post">
+            <input type="text" name="nom" id="nom" th:value="${valor_nombre}">
+            <select name="formCategoria" id="formCategoria">
+                <option value="">-- Todas las categorías --</option>
+                <option th:each="categoria : ${categorias}"
+                        th:value="${categoria}"
+                        th:text="${categoria}"
+                        th:selected="${categoria.toString() == valor_categoria}"
+                ></option>
+            </select>
+            <select name="formEstado" id="formEstado">
+                <option value="">-- Todos los estados --</option>
+                <option th:each="estado : ${estados}"
+                        th:value="${estado}"
+                        th:text="${estado.getTextoMostrar()}"
+                        th:selected="${estado == valor_estado}"
+                ></option>
+            </select>
+            <input type="submit" value="buscar">
+        </form>
+        <a href="/crearTarea">Crear tarea</a>
+        
+        <table>
+            <thead>
+                <tr>
+                    <!-- <th></th> -->
+                    <th>Nombre</th>
+                    <!-- Descripción seguramente la quite y la deje solo en detalle -->
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Estado</th>
+                    <th>Fecha trabajo</th>
+                    <th>Privacidad</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tarea : ${tareas}">
+                    <!-- <td>[*]</td> -->
+                    <td><span th:text="${tarea.getNombre()}"></span></td>
+                    <td><span th:text="${tarea.getDescripcion()}"></span></td>
+                    <td><span th:text="${tarea.getCategoria()}"></span></td>
+                    <td><span th:text="${tarea.getEstado().getTextoMostrar()}"></span></td>
+                    <td><span th:text="${tarea.getFechaTrabajoFormateada()}"></span></td>
+                    <td><span th:text="${tarea.getPrivacidad()}"></span></td>
+                    <td>
+                        <form action="/verTarea" method="post" class="iconoEditar">
+                            <button type="submit" name="idTareaBoton" id="idTareaBoton" th:value="${tarea.getId()}">
+                                <i class="fas fa-edit" style="color: #007bff; font-size: 18px;"></i>
+                            </button>
+                        </form>
+                        <form action="/verBorrarTarea" method="post" class="iconoEditar">
+                            <button type="submit" name="idTareaBoton" id="idTareaBoton" th:value="${tarea.getId()}">
+                                <i class="fas fa-trash-can" style="color: #bf0000; font-size: 18px;"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>        
+    </main>
+
     
 </body>
 </html>

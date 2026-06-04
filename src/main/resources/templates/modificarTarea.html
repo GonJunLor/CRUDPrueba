@@ -1,57 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <link rel="stylesheet" th:href="@{/css/estilosModificarTarea.css}">
     <title>Modificar tarea</title>
 </head>
 <body>
+    <header>
+        <a href="/">Volver a inicio público</a>
+        <a href="/cerrar">Cerrar Sesion</a>
+        <a href="/privado">Volver a inicio privado</a>        
+    </header>
     <h1>Estas modificando una tarea</h1>
-    <a href="/">Volver a inicio público</a>
-    <a href="/cerrar">Cerrar Sesion</a>
-    <a href="/privado">Volver a inicio privado</a>
 
-    <form action="/modificarTarea" method="post">
-        <input type="hidden" name="idTarea" id="idTarea" th:value="${valor_id}">
+    <main>
+        <form action="/modificarTarea" method="post">
+            <input type="hidden" name="idTarea" id="idTarea" th:value="${valor_id}">
+            <div>
+                <div>
+                    <input type="checkbox" name="hecho" id="hecho" th:checked="${valor_hecho}">
+                    <!-- <label for="hecho">Completado</label> -->
+                    <span class="error rojo" th:text="${error_hecho}"></span>
 
-        <input type="checkbox" name="hecho" id="hecho" th:checked="${valor_hecho}">
-        <label for="hecho">Completado</label>
-        <span class="error rojo" th:text="${error_hecho}"></span>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" th:value="${valor_nombre}">
+                    <span class="error rojo" th:text="${error_nombre}"></span>
+                </div>
+                    <label for="descripcion">Descripción</label>
+                    <input type="text" name="descripcion" id="descripcion" th:value="${valor_descripcion}">
+            </div>
+            <div>
+                <label for="categoria">Categoria</label>
+                <select name="categoria" id="categoria">
+                    <option th:if="${valor_categoria == ''}" value="" selected disabled hidden>-- Selecciona una categoría --</option>
+                    <option th:each="categoria : ${categorias}"
+                            th:value="${categoria}"
+                            th:text="${categoria}"
+                            th:selected="${categoria.toString() == valor_categoria}"
+                    ></option>
+                </select>
+                <span class="error rojo" th:text="${error_categoria}"></span>
 
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" id="nombre" th:value="${valor_nombre}">
-        <span class="error rojo" th:text="${error_nombre}"></span>
+                <label for="estado">Estado</label>
+                <input type="text" name="estado" id="estado" th:value="${valor_estado}" readonly>
 
-        <label for="descripcion">Descripción</label>
-        <input type="text" name="descripcion" id="descripcion" th:value="${valor_descripcion}">
+                <label for="privacidad">Privacidad:</label>
+                <input type="radio" id="privado" name="privacidad" value="Privada" th:checked="${valor_privacidad.equals('Privada')}">
+                <label for="privado">Privada</label>
+                <input type="radio" id="publico" name="privacidad" value="Publica" th:checked="${valor_privacidad.equals('Publica')}">
+                <label for="publico">Pública</label>
 
-        <label for="categoria">Categoria</label>
-        <select name="categoria" id="categoria">
-            <option th:if="${valor_categoria == ''}" value="" selected disabled hidden>-- Selecciona una categoría --</option>
-            <option th:each="categoria : ${categorias}"
-                    th:value="${categoria}"
-                    th:text="${categoria}"
-                    th:selected="${categoria.toString() == valor_categoria}"
-            ></option>
-        </select>
-        <span class="error rojo" th:text="${error_categoria}"></span>
+                <label for="fechaTrabajo">Fecha de trabajo</label>
+                <input type="date" name="fechaTrabajo" id="fechaTrabajo" th:value="${valor_fechaTrabajo}">
+                <span class="error rojo" th:text="${error_fechaTrabajo}"></span>
+            </div>
+            <input type="submit" value="Guardar">
+        </form>        
+    </main>
 
-        <label for="estado">Estado</label>
-        <input type="text" name="estado" id="estado" th:value="${valor_estado}" readonly>
-
-        <label for="privacidad">Privacidad:</label>
-        <input type="radio" id="privado" name="privacidad" value="Privada" th:checked="${valor_privacidad.equals('Privada')}">
-        <label for="privado">Privada</label>
-        <input type="radio" id="publico" name="privacidad" value="Publica" th:checked="${valor_privacidad.equals('Publica')}">
-        <label for="publico">Pública</label>
-
-        <label for="fechaTrabajo">Fecha de trabajo</label>
-        <input type="date" name="fechaTrabajo" id="fechaTrabajo" th:value="${valor_fechaTrabajo}">
-        <span class="error rojo" th:text="${error_fechaTrabajo}"></span>
-
-        <input type="submit" value="Entrar">
-    </form>
 
 </body>
 </html>

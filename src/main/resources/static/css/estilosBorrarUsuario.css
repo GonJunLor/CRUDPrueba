@@ -1,0 +1,158 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO (Material Design Palette - Modo Peligro)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght=300;400;500;700&display=swap');
+
+:root {
+    --danger-color: #d32f2f;        /* Rojo estándar de Material Design */
+    --danger-hover: #b71c1c;        /* Rojo oscuro para el hover */
+    --bg-color: #f5f5f5;            /* Fondo gris de la app */
+    --surface-color: #ffffff;       /* Blanco para la tarjeta */
+    --text-main: #212121;           /* Texto de alta prioridad */
+    --text-muted: #757575;          /* Texto secundario para etiquetas */
+    --border-readonly: #e0e0e0;     /* Gris para simular campos bloqueados */
+    --shadow-card: 0 10px 20px rgba(0,0,0,0.08), 0 6px 6px rgba(0,0,0,0.12);
+}
+
+/* ==========================================================================
+   2. REGLAS BASE Y ENTORNO CENTRALIZADO
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+/* ==========================================================================
+   3. TÍTULO DE ADVERTENCIA CRÍTICA
+   ========================================================================== */
+h1 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    text-align: center;
+    max-width: 480px;
+    margin-bottom: 28px;
+    line-height: 1.4;
+}
+
+/* Resaltamos el nombre del usuario en rojo */
+h1 span {
+    color: var(--danger-color);
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   4. TARJETA CONTENEDORA (Estructura limpia a una columna)
+   ========================================================================== */
+form {
+    background-color: var(--surface-color);
+    width: 100%;
+    max-width: 460px; /* Tamaño compacto idéntico a modificar usuario */
+    padding: 32px 40px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    border-top: 4px solid var(--danger-color); /* Línea roja de borrado */
+    
+    display: flex;
+    flex-direction: column;
+}
+
+/* Etiquetas (Labels) */
+form label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+/* Estilización para forzar aspecto visual de "Solo Lectura" */
+form input[type="text"] {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1px solid var(--border-readonly);
+    border-style: dashed;     /* Estilo discontinuo que simula el bloqueo */
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #555555;
+    background-color: #fafafa; /* Fondo ligeramente ceniza */
+    margin-bottom: 18px;
+    outline: none;
+    cursor: not-allowed;      /* Cursor con señal de prohibido */
+    pointer-events: none;     /* Evita que el usuario pueda escribir en ellos */
+}
+
+/* ==========================================================================
+   5. BOTÓN DE ACCIÓN "ACEPTAR"
+   ========================================================================== */
+form input[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+    margin-top: 6px;
+}
+
+form input[type="submit"]:hover {
+    background-color: var(--danger-hover);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+form input[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   6. BOTÓN DE ACCIÓN "CANCELAR" (Acoplado bajo la tarjeta)
+   ========================================================================== */
+a[href="/privado"] {
+    display: block;
+    width: 100%;
+    max-width: 460px; /* Mismo ancho exacto que el formulario */
+    text-align: center;
+    text-decoration: none;
+    
+    padding: 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    
+    background-color: var(--surface-color);
+    color: #666666;
+    border: 1px solid var(--border-readonly);
+    margin-top: -8px; /* Lo encaja visualmente con la base de la tarjeta */
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    
+    transition: background-color 0.2s, color 0.2s;
+}
+
+a[href="/privado"]:hover {
+    background-color: #f5f5f5;
+    color: #212121;
+}

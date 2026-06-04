@@ -1,0 +1,328 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO (Material Design Dark-Light Mix)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #3f51b5;       /* Azul Índigo institucional */
+    --accent-color: #00b0ff;        /* Celeste vivo para el botón de crear */
+    --bg-color: #f5f5f5;            /* Fondo gris claro de Android */
+    --surface-color: #ffffff;       /* Blanco para tarjetas, filtros y tablas */
+    --text-main: #212121;           /* Texto de alta prioridad */
+    --text-muted: #666666;          /* Texto secundario */
+    --border-color: #e0e0e0;        /* Separadores sutiles */
+    --shadow-card: 0 2px 4px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    --shadow-header: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ==========================================================================
+   2. REGLAS BASE
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    /* REQUISITO: Compensación de altura para que el contenido privado 
+       no se cuele debajo de la cabecera fija al cargar */
+    padding-top: 100px; 
+}
+
+main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 24px 50px 24px;
+}
+
+/* ==========================================================================
+   3. REQUISITO: HEADER Y NAVEGACIÓN COMPLETAMENTE FIJOS (Scroll-Safe)
+   ========================================================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 76px;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--shadow-header);
+    z-index: 1000;
+    
+    /* Maquetación inteligente sin tocar clases */
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+}
+
+header h1 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+header h2 {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    padding-left: 12px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    /* TRUCO: Hace de muelle y empuja a los enlaces subsiguientes a la derecha */
+    margin-right: auto; 
+    white-space: nowrap;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+header a:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Estilo Material destructivo para el botón de salida */
+header a[href="/cerrar"] {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header a[href="/cerrar"]:hover {
+    background-color: #d32f2f;
+    border-color: transparent;
+}
+
+/* ==========================================================================
+   4. FORMULARIO DE FILTROS Y BÚSQUEDA (Barra Superior de Control)
+   ========================================================================== */
+main > form {
+    display: flex;
+    gap: 16px;
+    background-color: var(--surface-color);
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Input de texto (Buscador por nombre) */
+main > form input[type="text"] {
+    flex: 2;
+    min-width: 200px;
+    padding: 11px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    background-color: #fafafa;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+main > form input[type="text"]:focus {
+    border-color: var(--primary-color);
+    background-color: white;
+}
+
+/* Desplegables de Categorías y Estados */
+main > form select {
+    flex: 1;
+    min-width: 180px;
+    padding: 11px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+main > form select:focus {
+    border-color: var(--primary-color);
+}
+
+/* Botón enviar "Buscar" */
+main > form input[type="submit"] {
+    padding: 11px 28px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+main > form input[type="submit"]:hover {
+    background-color: #303f9f;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* ==========================================================================
+   5. BOTÓN EXTENDED FAB "CREAR TAREA"
+   ========================================================================== */
+main > a[href="/crearTarea"] {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 24px; /* Forma de píldora flotante clásica de Android */
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14);
+    margin-bottom: 24px;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+main > a[href="/crearTarea"]:hover {
+    background-color: #0091ea;
+    box-shadow: 0 5px 11px rgba(0,0,0,0.25);
+}
+
+main > a[href="/crearTarea"]:active {
+    transform: scale(0.96);
+}
+
+/* Inyección de icono dinámico aprovechando FontAwesome de tu cabecera */
+main > a[href="/crearTarea"]::before {
+    content: "\f067"; /* Icono de suma '+' en FontAwesome */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   6. TABLA DE GESTIÓN PRIVADA
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+th {
+    background-color: #fcfcfc;
+    color: #757575;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-align: left;
+    padding: 16px 20px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+td {
+    padding: 16px 20px;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #fcfcfc;
+}
+
+/* ==========================================================================
+   7. TRATAMIENTO ESTÉTICO DE CELDAS INTERNAS (:nth-child)
+   ========================================================================== */
+/* Nombre */
+td:nth-child(1) span {
+    font-weight: 500;
+    color: var(--text-main);
+}
+/* Descripción */
+td:nth-child(2) span {
+    color: var(--text-muted);
+}
+/* Categoría, Estado y Privacidad (Badges redondos) */
+td:nth-child(3) span,
+td:nth-child(4) span,
+td:nth-child(6) span {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: #e8eaf6;
+    color: #3f51b5;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 12px;
+    text-transform: uppercase;
+}
+/* Color específico para la columna de Privacidad */
+td:nth-child(6) span {
+    background-color: #e0f2f1;
+    color: #004d40;
+}
+/* Fecha de trabajo */
+td:nth-child(5) span {
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   8. BLOQUE DE ACCIONES (Formularios de Edición y Borrado)
+   ========================================================================== */
+/* Forzamos que la última columna alinee sus elementos en horizontal */
+td:nth-child(7) {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+td:nth-child(7) form {
+    margin: 0;
+    display: inline-block;
+}
+
+td:nth-child(7) button {
+    background: none;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%; /* Foco perfectamente circular */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+}
+
+/* Efectos hover dedicados para cada tipo de acción */
+td:nth-child(7) form[action="/verTarea"] button:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+td:nth-child(7) form[action="/verBorrarTarea"] button:hover {
+    background-color: rgba(191, 0, 0, 0.1);
+}

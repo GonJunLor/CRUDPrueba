@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <link rel="stylesheet" th:href="@{/css/estilosModificarUsuario.css}">
     <title>Modificar usuario</title>
 </head>
 <body>
@@ -29,11 +29,12 @@
         <input type="text" name="descUsuario" id="descUsuario" th:value="${valor_descUsuario}">
 
         <label for="perfil">Perfil:</label>
-        <input type="radio" id="usuario" name="perfil" value="Usuario" th:checked="${valor_perfil.equals('Usuario')}">
-        <label for="privado">Usuario</label>
-        <input type="radio" id="admin" name="perfil" value="Admin" th:checked="${valor_perfil.equals('Admin')}">
-        <label for="publico">Administrador</label>
-
+        <div>
+            <input type="radio" id="usuario" name="perfil" value="Usuario" th:checked="${valor_perfil.equals('Usuario')}">
+            <label for="privado">Usuario</label>
+            <input type="radio" id="admin" name="perfil" value="Admin" th:checked="${valor_perfil.equals('Admin')}">
+            <label for="publico">Administrador</label>            
+        </div>
         <input type="submit" value="Guardar">
     </form>
     

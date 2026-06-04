@@ -1,0 +1,281 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO (Línea Visual Homogénea de Inicio)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #3f51b5;       /* Azul Índigo de la página de Inicio */
+    --primary-hover: #303f9f;       /* Azul oscuro para interacciones */
+    --bg-color: #f5f5f5;            /* Fondo gris claro de Android */
+    --surface-color: #ffffff;       /* Blanco para la tarjeta del formulario */
+    --text-main: #212121;           /* Texto de alta prioridad */
+    --text-muted: #666666;          /* Texto secundario para etiquetas */
+    --border-color: #e0e0e0;        /* Separadores sutiles */
+    --error-color: #d32f2f;         /* Rojo Material Design para validaciones */
+    --shadow-card: 0 2px 4px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    --shadow-header: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ==========================================================================
+   2. REGLAS BASE
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    /* Compensación de altura idéntica para que el contenido no se cuele tras el header */
+    padding-top: 110px; 
+}
+
+/* Con esta maquetación centramos la tarjeta del formulario en la pantalla */
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px 50px 24px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   3. CABECERA FIJA (Idéntica a la página de Inicio Privado)
+   ========================================================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 76px;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--shadow-header);
+    z-index: 1000;
+    
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+}
+
+header h1 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    /* TRUCO: Hace de muelle y empuja de inmediato todos los enlaces a la derecha */
+    margin-right: auto; 
+    white-space: nowrap;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+header a:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Enlace especial destacado "Volver a inicio privado" */
+header a[href="/privado"] {
+    background-color: rgba(255, 255, 255, 0.15);
+    font-weight: 700;
+}
+
+header a[href="/privado"]:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Botón destructivo de cerrar sesión */
+header a[href="/cerrar"] {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header a[href="/cerrar"]:hover {
+    background-color: #d32f2f;
+    border-color: transparent;
+}
+
+/* ==========================================================================
+   4. TARJETA FORMULARIO "CREAR TAREA"
+   ========================================================================== */
+main > form {
+    background-color: var(--surface-color);
+    width: 100%;
+    max-width: 550px; /* Ancho cómodo y elegante */
+    padding: 32px 40px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    border-top: 4px solid var(--primary-color); /* Línea decorativa superior */
+    
+    display: flex;
+    flex-direction: column;
+}
+
+/* Etiquetas generales */
+main > form > label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Exclusión específica: No queremos aplicar márgenes de bloque a las etiquetas de los botones radio */
+main > form > label[for="privado"],
+main > form > label[for="publico"] {
+    text-transform: none;
+    font-weight: 400;
+    margin-bottom: 0;
+    letter-spacing: 0px;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+/* Inputs de Texto, Selects y Calendarios */
+main > form input[type="text"],
+main > form select,
+main > form input[type="date"] {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    background-color: #fafafa;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+main > form input[type="text"]:focus,
+main > form select:focus,
+main > form input[type="date"]:focus {
+    border-color: var(--primary-color);
+    background-color: white;
+}
+
+/* Manejo estricto de márgenes si hay un span de error debajo */
+main > form input + span,
+main > form select + span {
+    margin-top: -12px;
+}
+
+/* Margen por defecto hacia abajo si el input no va seguido de error */
+main > form input[type="text"],
+main > form select,
+main > form input[type="date"] {
+    margin-bottom: 18px;
+}
+
+/* ==========================================================================
+   5. TRATAMIENTO ELEGANTE DE BOTONES DE RADIO (Con contenedor DIV)
+   ========================================================================== */
+/* La etiqueta principal "Privacidad:" mantiene su estilo de bloque */
+main > form > label[for="privacidad"] {
+    margin-top: 6px;
+    margin-bottom: 10px; /* Separación pequeña con los botones que vienen debajo */
+}
+
+/* ¡EL TRUCO NUEVO! 
+   Aplicamos Flexbox sobre el div contenedor para alinear todo en horizontal 
+*/
+main > form > div {
+    display: flex;
+    align-items: center;      /* Centra verticalmente los círculos con los textos */
+    gap: 8px;                 /* Espacio uniforme entre los elementos */
+    margin-bottom: 20px;      /* Separación del contenedor respecto al campo 'Fecha de trabajo' */
+    width: 100%;
+}
+
+/* Estilización de los círculos de opción (Inputs de tipo radio) */
+main > form > div input[type="radio"] {
+    appearance: none;         /* Eliminamos el diseño por defecto del sistema operativo */
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--text-muted);
+    border-radius: 50%;       /* Círculo perfecto */
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    margin: 0;                /* Reseteamos márgenes para que Flexbox controle el gap */
+    
+    transition: border-color 0.2s;
+}
+
+/* Efecto punto central estilo Material Design al ser seleccionado */
+main > form > div input[type="radio"]:checked {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    box-shadow: inset 0 0 0 3px white; 
+}
+
+/* Estilización exclusiva de las etiquetas "Privado" y "Público" */
+main > form > div label {
+    font-size: 0.95rem;
+    font-weight: 400;
+    text-transform: none;     /* Evitamos que se pongan en mayúsculas como las de fuera */
+    letter-spacing: 0;
+    color: var(--text-main);
+    cursor: pointer;
+    
+    /* Añadimos un margen derecho solo a estas etiquetas para separar 
+       la opción "Privado" del siguiente botón "Público" 
+    */
+    margin-right: 18px;       
+    margin-bottom: 0;         /* Forzamos que no empujen hacia abajo */
+}
+
+/* ==========================================================================
+   6. MENSAJES DE ERROR (Thymeleaf Spans)
+   ========================================================================== */
+main > form span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--error-color);
+    margin-bottom: 16px;
+    padding-left: 4px;
+}
+
+/* ==========================================================================
+   7. BOTÓN ACCIÓN DE ENVÍO (Mantiene "Entrar" del HTML)
+   ========================================================================== */
+main > form input[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+    margin-top: 10px;
+}
+
+main > form input[type="submit"]:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+main > form input[type="submit"]:active {
+    transform: scale(0.98);
+}

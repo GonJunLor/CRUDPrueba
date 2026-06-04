@@ -1,0 +1,373 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO (Material Design Admin Theme - Tonos Oscuros/Escudo)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght=300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #1a237e;       /* Azul Índigo Muy Oscuro (Denota nivel Admin) */
+    --accent-color: #00b0ff;        /* Celeste vivo para elementos de creación */
+    --bg-color: #f4f6f9;            /* Fondo gris claro de consola corporativa */
+    --surface-color: #ffffff;       /* Blanco para tarjetas y tablas */
+    --text-main: #212121;           /* Texto de alta prioridad */
+    --text-muted: #666666;          /* Texto secundario/descripciones */
+    --border-color: #e0e0e0;        /* Separadores grises de celdas */
+    --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+    --shadow-header: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ==========================================================================
+   2. REGLAS BASE
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    /* REQUISITO: Espacio superior exacto para la cabecera fija */
+    padding-top: 100px; 
+}
+
+/* ==========================================================================
+   3. TRUCO DE REJILLA AVANZADA PARA TABLAS LADO A LADO (Sin tocar HTML)
+   ========================================================================== */
+main {
+    max-width: 1600px; /* Un poco más ancho para albergar cómodamente ambas tablas */
+    margin: 0 auto;
+    padding: 0 24px 50px 24px;
+    
+    /* Configuración por defecto: En móviles/tablets se ven una debajo de otra */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Cuando la pantalla es lo bastante ancha (PC/Monitor), se ponen en paralelo */
+@media (min-width: 1100px) {
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Divide el espacio en dos columnas idénticas (50% cada una) */
+        align-items: start;
+    }
+    
+    /* Obliga al formulario y al botón "Crear tarea" a saltarse la división y ocupar el 100% horizontal */
+    main > form, 
+    main > a[href="/crearTarea"] {
+        grid-column: span 2; 
+    }
+}
+
+/* ==========================================================================
+   4. HEADER DE CONTROL ADMINISTRATIVO FIJO
+   ========================================================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 76px;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--shadow-header);
+    z-index: 1000;
+    
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+}
+
+header h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+header h2 {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    padding-left: 12px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    /* TRUCO: Empuja los enlaces de sesión e inicio a la esquina derecha */
+    margin-right: auto; 
+    white-space: nowrap;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+header a:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+header a[href="/cerrar"] {
+    background-color: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.4);
+    color: #ff8a80;
+}
+
+header a[href="/cerrar"]:hover {
+    background-color: #d32f2f;
+    color: white;
+    border-color: transparent;
+}
+
+/* ==========================================================================
+   5. PANEL MULTI-FILTRO (Combina Texto y 3 Selects)
+   ========================================================================== */
+main > form {
+    display: flex;
+    gap: 12px;
+    background-color: var(--surface-color);
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+main > form input[type="text"] {
+    flex: 2;
+    min-width: 150px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    outline: none;
+}
+
+main > form select {
+    flex: 1;
+    min-width: 140px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+main > form input[type="text"]:focus, 
+main > form select:focus {
+    border-color: var(--primary-color);
+}
+
+main > form input[type="submit"] {
+    padding: 10px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+main > form input[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+/* ==========================================================================
+   6. BOTÓN EXTENDED FAB "CREAR TAREA"
+   ========================================================================== */
+main > a[href="/crearTarea"] {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    border-radius: 24px;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+    margin-bottom: 8px;
+    width: max-content;
+}
+
+main > a[href="/crearTarea"]::before {
+    content: "\f067";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 8px;
+}
+
+/* ==========================================================================
+   7. DISEÑO COLECTIVO DE LAS TABLAS
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    table-layout: fixed; /* Fuerza a las celdas a repartirse equitativamente en el 50% de pantalla */
+}
+
+th {
+    background-color: #fafafa;
+    color: #757575;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 14px 16px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+td {
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    word-break: break-word; /* Evita que textos largos rompan la estructura side-by-side */
+}
+
+tbody tr:hover {
+    background-color: #fcfcfc;
+}
+
+/* ==========================================================================
+   8. SELECTORES EXCLUSIVOS PARA LA TABLA 1: TAREAS (Izquierda)
+   ========================================================================== */
+table:nth-of-type(1) th {
+    border-top: 3px solid #3f51b5; /* Línea decorativa azul para tareas */
+}
+
+/* Nombre Tarea */
+table:nth-of-type(1) td:nth-child(1) span {
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+/* Categoría, Estado, Privacidad, Propietario (Badges de colores) */
+table:nth-of-type(1) td:nth-child(2) span,
+table:nth-of-type(1) td:nth-child(3) span,
+table:nth-of-type(1) td:nth-child(5) span,
+table:nth-of-type(1) td:nth-child(6) span {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #e8eaf6;
+    color: #283593;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+/* Variación sutil para columna de privacidad */
+table:nth-of-type(1) td:nth-child(5) span {
+    background-color: #e0f2f1;
+    color: #004d40;
+}
+
+/* Fecha de trabajo */
+table:nth-of-type(1) td:nth-child(4) span {
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   9. SELECTORES EXCLUSIVOS PARA LA TABLA 2: USUARIOS (Derecha)
+   ========================================================================== */
+table:nth-of-type(2) th {
+    border-top: 3px solid #e91e63; /* Línea decorativa rosa/magenta para usuarios */
+}
+
+/* Columna de viñeta [*] */
+table:nth-of-type(2) td:nth-child(1) {
+    color: #b0bec5;
+    text-align: center;
+    font-weight: bold;
+    width: 40px;
+}
+
+/* Código de usuario */
+table:nth-of-type(2) td:nth-child(2) span {
+    font-weight: 700;
+    color: #c2185b;
+}
+
+/* Descripción del usuario */
+table:nth-of-type(2) td:nth-child(3) span {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* Perfil (Rol) */
+table:nth-of-type(2) td:nth-child(5) span {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #ffe0b2;
+    color: #e65100;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   10. COLUMNA DE ACCIONES Y BOTONES (Corregido: En línea y ordenados)
+   ========================================================================== */
+/* Forzamos que la última celda de AMBAS tablas ordene sus hijos en horizontal */
+table:nth-of-type(1) td:nth-child(7),
+table:nth-of-type(2) td:nth-child(6) {
+    display: flex;       /* Activa el alineado horizontal */
+    gap: 8px;            /* Espacio de separación entre el botón de editar y borrar */
+    justify-content: flex-start; /* Los alinea al principio de la celda (izquierda) */
+    align-items: center; /* Los centra verticalmente si la fila es alta */
+}
+
+/* Evitamos que el formulario rompa el flujo o añada márgenes invisibles */
+td form {
+    margin: 0;
+    display: inline-flex; 
+}
+
+/* Estilo estandarizado para los botones circulares */
+td button {
+    background: none;
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%; /* Foco circular perfecto estilo Material */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Efectos hover dedicados según el tipo de acción dentro de los formularios */
+td form[action*="verTarea"] button:hover,
+td form[action*="verUsuario"] button:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Fondo azul tenue para editar */
+}
+
+td form[action*="Borrar"] button:hover {
+    background-color: rgba(191, 0, 0, 0.1); /* Fondo rojo tenue para borrar */
+}
+
+td button:active {
+    transform: scale(0.9); /* Pequeño feedback visual al hacer click */
+}

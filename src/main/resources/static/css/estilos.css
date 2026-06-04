@@ -1,4 +1,4 @@
-h1{
+/* h1{
     color: yellow;
     background-color: rgb(133, 3, 3);
     text-align: center;
@@ -29,4 +29,205 @@ form{
 }
 .checkbox-bloqueado {
     pointer-events: none;
+} */
+/* ==========================================================================
+   1. IMPORTACIÓN DE FUENTE Y VARIABLES DE ESTILO (Material Design)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #3f51b5;       /* Azul Indigo clásico de Material Design */
+    --accent-color: #007bff;        /* Azul brillante para el botón de ver */
+    --bg-color: #f5f5f5;            /* Fondo gris claro minimalista */
+    --surface-color: #ffffff;       /* Blanco para contenedores y tablas */
+    --text-main: #212121;           /* Texto principal de alta densidad */
+    --text-muted: #757575;          /* Texto secundario para descripciones */
+    --border-color: #e0e0e0;        /* Gris de división Material */
+    --shadow-table: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    --shadow-header: 0 2px 4px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* ==========================================================================
+   2. REGLAS BASE Y RESETEO
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    /* REQUISITO: Margen superior idéntico al alto del header fijo 
+       para evitar que la tabla se oculte detrás al cargar la página */
+    padding-top: 84px; 
+}
+
+main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px 44px 24px;
+}
+
+/* ==========================================================================
+   3. REQUISITO: CABECERA Y ENLACES SIEMPRE FIJOS (Scroll Infinito)
+   ========================================================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--shadow-header);
+    z-index: 1000; /* Asegura que la cabecera flote siempre sobre la tabla */
+    
+    /* Configuración Flexbox sin alterar el HTML */
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 12px;
+}
+
+header h1 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    /* TRUCO: Empuja automáticamente todos los enlaces (<a>) hermanos 
+       hacia el extremo derecho de la pantalla */
+    margin-right: auto; 
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase; /* Estilo de botón de texto Material */
+    letter-spacing: 0.75px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+header a:hover {
+    background-color: rgba(255, 255, 255, 0.12); /* Efecto ripple/hover sutil */
+}
+
+/* Tratamiento especial opcional si coincide con el enlace de cerrar sesión */
+header a[href="/cerrar"]:hover {
+    background-color: rgba(244, 67, 54, 0.2); /* Tono rojizo muy suave al pasar por encima */
+    color: #ff8a80;
+}
+
+/* ==========================================================================
+   4. DISEÑO DE TABLA ESTILO MATERIAL DESIGN (Sin usar clases)
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    overflow: hidden; /* Mantiene las esquinas redondeadas en los bordes */
+    box-shadow: var(--shadow-table);
+    margin-top: 16px;
+}
+
+th {
+    background-color: #fafafa;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-align: left;
+    padding: 18px 24px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+td {
+    padding: 18px 24px;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+/* Quita la línea divisoria a la última fila de la tabla */
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Efecto hover en las filas de tareas */
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* ==========================================================================
+   5. CONTROL ADVANZADO DE COLUMNAS (Estilizado por posición :nth-child)
+   ========================================================================== */
+
+/* Columna 1: Nombre de la Tarea (Más destacado) */
+td:nth-child(1) span {
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+/* Columna 2: Descripción (Texto secundario/atenuado) */
+td:nth-child(2) span {
+    color: var(--text-muted);
+}
+
+/* Columnas 3, 4 y 6: Categoría, Estado y Privacidad (Estilo píldora/badge de Android) */
+td:nth-child(3) span,
+td:nth-child(4) span,
+td:nth-child(6) span {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: #eeeeee;
+    color: #424242;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Columna 5: Fecha de trabajo (Estilo numérico limpio) */
+td:nth-child(5) span {
+    color: #43a047; /* Un tono verde Material discreto para las fechas */
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   6. BOTÓN ACCIÓN DE FORMULARIO (Icono de la última columna)
+   ========================================================================== */
+td form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+td form button {
+    background: none;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%; /* Convierte el foco en un círculo perfecto de Material */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Efecto de pulsación circular al pasar el ratón por encima del ojo */
+td form button:hover {
+    background-color: rgba(0, 123, 255, 0.08);
+}
+
+td form button:active {
+    transform: scale(0.92); /* Pequeño feedback táctil al hacer click */
 }
