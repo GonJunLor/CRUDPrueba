@@ -44,7 +44,7 @@ public class BorraTarea {
         modelo.addAttribute("valor_estado", tarea.getStringEstado());
         modelo.addAttribute("valor_fechaTrabajo", tarea.getFechaTrabajo());
 
-        return "/borrarTarea";
+        return "borrarTarea";
     }
 
     @PostMapping("/borrarTarea")
